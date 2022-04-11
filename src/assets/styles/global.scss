@@ -1,0 +1,27 @@
+:root {
+    --c-border: #dadce0;
+    --c-text: #5f6368;
+    --c-text-light: #70757a;
+    --c-text-dark: #3c4043;
+    --c-block-hover: #f1f3f4;
+    --c-bg: rgba(255,255,255,1);
+    --c-accent: #66bb6a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
