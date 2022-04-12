@@ -13,7 +13,6 @@
 <script setup>
 import Header from '@/components/Header.vue'
 import AsideMenu from '@/components/AsideMenu/AsideMenu'
-import Modal from '@/components/Modal/Modal'
 import { useMenu } from '@/composables/useMenu'
 
 const [open, toggleOpen] = useMenu()

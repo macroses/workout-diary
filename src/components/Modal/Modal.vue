@@ -1,15 +1,10 @@
 <template>
   <teleport to="body">
     <transition name="fade">
-      <div class="modal-box" v-if="value">
-        <div class="layout" @click="showModal = !showModal"></div>
+      <div class="modal-box" v-if="isModalActive">
+        <div class="layout" @click="close"></div>
         <div class="modal">
-          <div class="title">
-            <slot name="header"/>
-          </div>
-          <div class="content">
-            <slot name="content" />
-          </div>
+          <slot />
         </div>
       </div>
     </transition>
@@ -17,16 +12,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-
 const props = defineProps({
-  value: { required: true }
+  isModalActive: { type: Boolean }
 })
 
-const emits = defineEmits(['input', !props.value])
-
-console.log(props.value);
-
+const emits = defineEmits(['close'])
+const close = () => emits('close')
 </script>
 
 <style lang="scss" scoped>
