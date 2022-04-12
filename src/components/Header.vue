@@ -23,8 +23,6 @@ const emit = defineEmits(['toggleMenu'])
 const hideMenu = () => {
   emit('toggleMenu')
 }
-
-console.log(props)
 </script>
 
 <style scoped lang="scss">

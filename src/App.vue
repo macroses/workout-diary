@@ -1,26 +1,22 @@
 <template>
   <Header
-      @toggleMenu="toggleMenu"
-      :isMenuOpen="isMenuOpen"/>
+      @toggleMenu="toggleOpen"
+      :isMenuOpen="open"/>
   <main>
     <div class="container">
-      <AsideMenu :isMenuOpen="isMenuOpen"/>
-      <router-view :isMenuOpen="isMenuOpen" />
+      <AsideMenu :isMenuOpen="open"/>
+      <router-view />
     </div>
   </main>
-  <footer></footer>
 </template>
 
 <script setup>
 import Header from '@/components/Header.vue'
 import AsideMenu from '@/components/AsideMenu/AsideMenu'
-import {ref} from 'vue'
+import Modal from '@/components/Modal/Modal'
+import { useMenu } from '@/composables/useMenu'
 
-let isMenuOpen = ref(false);
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+const [open, toggleOpen] = useMenu()
 </script>
 
 <style>
