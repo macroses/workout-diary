@@ -4,7 +4,10 @@
       <div class="modal-box" v-if="isModalActive">
         <div class="layout" @click="close"></div>
         <div class="modal">
-          <slot />
+          <div class="modal-header">
+            <div class="title">{{ title }}</div>
+            <Icon iconName="xmark" @click="close" class="closeIcon"/>
+          </div>
         </div>
       </div>
     </transition>
@@ -12,8 +15,11 @@
 </template>
 
 <script setup>
+import Icon from '@/components/UI/Icon'
+
 const props = defineProps({
-  isModalActive: { type: Boolean }
+  isModalActive: { type: Boolean },
+  title: { type: String}
 })
 
 const emits = defineEmits(['close'])
@@ -30,6 +36,10 @@ const close = () => emits('close')
   background: rgba(0, 0, 0, 0.3);
 }
 
+.closeIcon {
+  cursor: pointer;
+}
+
 .modal {
   position: absolute;
   left: 50%; top: 50%;
@@ -41,6 +51,12 @@ const close = () => emits('close')
   padding: 1em;
   border-radius: 0.2em;
   background: white;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .fade-enter-active,
