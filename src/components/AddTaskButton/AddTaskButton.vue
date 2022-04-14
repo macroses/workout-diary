@@ -18,6 +18,9 @@
         @close="toggleModal"
         :isModalActive="isModalOpen"
         :title="addExerciseTitle">
+        <template #modalContent>
+          <ModalAddExercise />
+        </template>
     </Modal>
   </div>
 </template>
@@ -25,8 +28,8 @@
 <script setup>
 import Icon from "@/components/UI/Icon"
 import Modal from "@/components/Modal/Modal.vue";
-import {ref} from "vue"
 import ModalAddExercise from "@/components/Modal/ModalAddExercise.vue";
+import {ref} from "vue"
 
 let isModalOpen = ref(false)
 

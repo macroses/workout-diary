@@ -8,27 +8,49 @@
       <li
           v-for="( day, index ) in days"
           :key="index"
-          :class="{ today: checkDateEqually(day) }" >
+          :class="{ today: checkDateEqually(day) }" 
+          @click="toggleModal(day)">
         <span class="day-num">{{ day.format('D') }}</span>
       </li>
     </ul>
+
+    <Modal
+        :dayData="store.currentDayForCreateWorkout"
+        @close="toggleModal"
+        :isModalActive="isModalOpen"
+        title="Новая тренировка">
+        <template #modalContent>
+          <ModalAddExercise />
+        </template>
+    </Modal>
   </div>
 </template>
 
 <script setup>
 import moment from 'moment'
+import Modal from '@/components/Modal/Modal'
+import { useStore } from '../store/index';
+import { ref } from 'vue-demi';
+
+
+const store = useStore()
+
+let isModalOpen = ref(false)
+const toggleModal = (day) => {
+  isModalOpen.value = !isModalOpen.value
+  store.currentDayForCreateWorkout = day
+}
 
 const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс",]
-
-const dayContext = moment()
+const dayContext = moment().lang('ru')
 const currentDate = dayContext.get('date')
 
 const emptyDays = moment(dayContext).subtract((currentDate), 'days').weekday()
 const monthDate = dayContext.startOf('month')
-
 const days = [...Array(monthDate.daysInMonth())].map((_, i) => monthDate.clone().add(i, 'day'))
 
 const checkDateEqually = (day) => moment().isSame(day, 'day')
+
 </script>
 
 <style lang="scss" scoped>
