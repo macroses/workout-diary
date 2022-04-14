@@ -5,8 +5,18 @@
         <div class="layout" @click="close"></div>
         <div class="modal">
           <div class="modal-header">
-            <div class="title">{{ title }} {{dayData.format('D.MM.Y')}}</div>
-            <Icon iconName="xmark" @click="close" class="closeIcon"/>
+            <div
+                class="title">
+              {{ title }}
+              <span
+                  :class="{today: checkDateEqually(dayData)}">
+                {{ checkDateEqually(dayData) ? "сегодня" : dayData.format('D.MM.Y')}}
+              </span>
+            </div>
+            <Icon
+                iconName="xmark"
+                @click="close"
+                class="closeIcon"/>
           </div>
           <div class="modal-content">
             <slot name="modalContent"></slot>
@@ -19,6 +29,7 @@
 
 <script setup>
 import Icon from '@/components/UI/Icon'
+import moment from "moment";
 
 const props = defineProps({
   isModalActive: { type: Boolean },
@@ -28,6 +39,8 @@ const props = defineProps({
 
 const emits = defineEmits(['close'])
 const close = () => emits('close')
+
+const checkDateEqually = (day) => moment().isSame(day, 'day')
 
 </script>
 
@@ -41,9 +54,19 @@ const close = () => emits('close')
   background: rgba(0, 0, 0, 0.3);
 }
 
+.today {
+  background: var(--c-accent);
+  color: var(--c-bg);
+}
+
 .title {
   font-size: 20px;
   font-weight: 500;
+  span {
+    display: inline-block;
+    padding: 3px 5px;
+    border-radius: 4px;
+  }
 }
 
 .closeIcon {

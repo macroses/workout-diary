@@ -11,33 +11,23 @@
         v-if="isOptionsListOpen"
         class="add_task_options">
       <li>{{ addWorkoutTitle }}</li>
-      <li @click="toggleModal">{{ addExerciseTitle }}</li>
+      <li @click="toggleModal">
+        {{ addExerciseTitle }}
+      </li>
     </ul>
-
-    <Modal
-        @close="toggleModal"
-        :isModalActive="isModalOpen"
-        :title="addExerciseTitle">
-        <template #modalContent>
-          <ModalAddExercise />
-        </template>
-    </Modal>
   </div>
 </template>
 
 <script setup>
 import Icon from "@/components/UI/Icon"
-import Modal from "@/components/Modal/Modal.vue";
-import ModalAddExercise from "@/components/Modal/ModalAddExercise.vue";
 import {ref} from "vue"
-
-let isModalOpen = ref(false)
-
-const toggleModal = () => isModalOpen.value = !isModalOpen.value
 
 const props = defineProps({
   isMenuOpen: { type: Boolean }
 })
+
+let isModalOpen = ref(false)
+const toggleModal = () => isModalOpen.value = !isModalOpen.value
 
 const addExerciseTitle = "Добавить упражнение"
 const addWorkoutTitle = "Добавить тренировку"

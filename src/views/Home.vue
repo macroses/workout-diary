@@ -29,8 +29,9 @@
 <script setup>
 import moment from 'moment'
 import Modal from '@/components/Modal/Modal'
+import ModalAddExercise from '@/components/Modal/ModalAddExercise'
 import { useStore } from '../store/index';
-import { ref } from 'vue-demi';
+import { ref } from 'vue';
 
 
 const store = useStore()
