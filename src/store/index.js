@@ -3,21 +3,8 @@ import { defineStore } from "pinia"
 export const useStore = defineStore('main', {
   state: () => {
     return {
-      currentDayForCreateWorkout: {}
+      currentDayForCreateWorkout: {},
+      usersGroupName: ''
     }
   }
 })
-
-// import { createStore } from 'vuex'
-
-// export default createStore({
-//   state: {
-//     exercises: []
-//   },
-//   mutations: {
-//   },
-//   actions: {
-//   },
-//   modules: {
-//   }
-// })

@@ -64,7 +64,7 @@ const checkDateEqually = (day) => moment().isSame(day, 'day')
   font-weight: 500;
   span {
     display: inline-block;
-    padding: 3px 5px;
+    padding: 1px 4px;
     border-radius: 4px;
   }
 }
@@ -77,12 +77,11 @@ const checkDateEqually = (day) => moment().isSame(day, 'day')
   position: absolute;
   left: 50%; 
   top: 50%;
-  width: calc(100vw - 4em);
   max-width: 32em;
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);
-  padding: 1em;
+  padding: 1em 0;
   border-radius: 0.2em;
   background: white;
 }
@@ -91,6 +90,7 @@ const checkDateEqually = (day) => moment().isSame(day, 'day')
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 16px;
 }
 
 .fade-enter-active,

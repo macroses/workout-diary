@@ -1,7 +1,14 @@
 {
-  "category": {
-
-  },
+  "category": [
+    {"id": 1, "groupName": "Грудные", "iconName": "transporter"},
+    {"id": 2, "groupName": "Руки", "iconName": "person-biking"},
+    {"id": 3, "groupName": "Спина", "iconName": "cubes"},
+    {"id": 4, "groupName": "Ноги", "iconName": "futbol"},
+    {"id": 5, "groupName": "Плечи", "iconName": "dna"},
+    {"id": 6, "groupName": "Корпус", "iconName": "burst"},
+    {"id": 7, "groupName": "Фуллбоди", "iconName": "person"},
+    {"id": 8, "groupName": "Кардио", "iconName": "heart-pulse"}
+  ],
   "exercises": {
 
   }

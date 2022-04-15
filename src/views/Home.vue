@@ -12,9 +12,7 @@
           @click="toggleModal(day)">
         <span class="day-num">{{ day.format('D') }}</span>
 
-        <ul class="day-tasks">
-          <li></li>
-        </ul>
+        <div class="day-tasks"></div>
         <div class="empty-area"></div>
       </li>
     </ul>
@@ -113,4 +111,5 @@ const checkDateEqually = (day) => moment().isSame(day, 'day')
     border-radius: 50%;
   }
 }
+
 </style>

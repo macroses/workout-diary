@@ -14,7 +14,7 @@ const props = defineProps({
 
 <style scoped>
 svg {
-  width: 24px;
+  width: auto;
   height: 24px;
   fill: var(--c-text);
 }
