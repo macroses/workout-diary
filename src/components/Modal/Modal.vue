@@ -5,12 +5,17 @@
         <div class="layout" @click="close"></div>
         <div class="modal">
           <div class="modal-header">
-            <div
-                class="title">
-              {{ title }}
+            <div class="title">
+              <input
+                  type="text"
+                  v-if="isWorkoutNameActive"
+                  v-model="workoutName"
+                  placeholder="Название тренировки"
+                  @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"/>
+              <span v-else>{{ workoutName }}</span>
               <span
                   :class="{today: checkDateEqually(dayData)}">
-                {{ checkDateEqually(dayData) ? "сегодня" : dayData.format('D.MM.Y')}}
+                {{ checkDateEqually(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
               </span>
             </div>
             <Icon
@@ -30,18 +35,31 @@
 <script setup>
 import Icon from '@/components/UI/Icon'
 import moment from "moment";
+import {ref} from "vue";
+import { useStore } from '@/store'
 
 const props = defineProps({
-  isModalActive: { type: Boolean },
-  title: { type: String},
-  dayData: { type: Object }
+  isModalActive: Boolean,
+  title: String,
+  dayData: Object,
+  isWorkoutNameActive: Boolean
 })
+
+const store = useStore()
 
 const emits = defineEmits(['close'])
 const close = () => emits('close')
 
 const checkDateEqually = (day) => moment().isSame(day, 'day')
 
+const workoutName = ref('')
+const isWorkoutNameActive = ref(true)
+
+const workoutNameToStore = (value, date) => {
+  store.userWorkoutName.userValue = value
+  store.userWorkoutName.date = date
+  isWorkoutNameActive.value = false
+}
 </script>
 
 <style lang="scss" scoped>

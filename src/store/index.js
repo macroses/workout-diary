@@ -4,7 +4,11 @@ export const useStore = defineStore('main', {
   state: () => {
     return {
       currentDayForCreateWorkout: {},
-      usersGroupName: ''
+      usersGroupName: '',
+      userWorkoutName: {
+        userValue: null,
+        date: null
+      }
     }
   }
 })

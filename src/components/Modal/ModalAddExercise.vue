@@ -23,15 +23,13 @@
       class="createCategoryForm">
       <InputText 
         @userInput="dropUsersGroupNameToStore"
-        :inputValue="usersInputValue" 
+        :inputValue="usersInputValue"
         pholder="Название группы" />
       <div class="btn-group">
+        <Button @click="createCategoryForm">Отменить</Button>
         <Button
-          @click="createCategoryForm"
-          iconName="ban">Отменить</Button>
-        <Button 
-          @click="toExerciseGroup"
-          iconName="floppy-disk">Сохранить</Button>
+            :accentColor="true"
+            @click="toExerciseGroup">Сохранить</Button>
       </div>
     </div>
   </div>
@@ -43,7 +41,7 @@ import Exercises from '@/api/api'
 import { onMounted, ref } from 'vue'
 import Button from '@/components/UI/Button.vue';
 import InputText from '@/components/UI/InputText.vue';
-import { useStore } from '@/store/index';
+import { useStore } from '@/store';
 
 let usersInputValue = ref('')
 let isNewGroupFormVisible = ref(false)
@@ -111,8 +109,6 @@ const toExerciseGroup = () => {
 .btn-group {
   display: flex;
   justify-content: flex-end;
-  button {
-    margin-left: 8px;
-  }
+  gap: 8px;
 }
 </style>
