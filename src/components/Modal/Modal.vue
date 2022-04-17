@@ -4,26 +4,33 @@
       <div class="modal-box" v-if="isModalActive">
         <div class="layout" @click="close"></div>
         <div class="modal">
-          <div class="modal-header">
-            <div class="title">
-              <input
-                  type="text"
-                  v-if="isWorkoutNameActive"
-                  v-model="workoutName"
-                  placeholder="Название тренировки"
-                  @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"/>
-              <span v-else>{{ workoutName }}</span>
-              <span
-                  :class="{today: checkDateEqually(dayData)}">
-                {{ checkDateEqually(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
-              </span>
-            </div>
+          <div class="modal-top">
             <Icon
                 iconName="xmark"
                 @click="close"
                 class="closeIcon"/>
           </div>
+          <div class="modal-header">
+            <div class="inp-workoutName__box">
+              <input
+                  type="text"
+                  v-if="isWorkoutNameActive"
+                  v-model="workoutName"
+                  placeholder="Название тренировки"
+                  @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
+                  class="inp-workoutName"/>
+              <div class="workoutName-result" v-else> {{ workoutName }}</div>
+            </div>
+          </div>
           <div class="modal-content">
+            <div
+                class="day-of-workout__desc"
+                :class="{today: checkDateEqually(dayData)}">
+                Дата тренировки:
+              <span>
+                {{ checkDateEqually(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
+              </span>
+              </div>
             <slot name="modalContent"></slot>
           </div>
         </div>
@@ -72,9 +79,42 @@ const workoutNameToStore = (value, date) => {
   background: rgba(0, 0, 0, 0.3);
 }
 
-.today {
-  background: var(--c-accent);
-  color: var(--c-bg);
+.day-of-workout__desc {
+  font-size: 12px;
+  padding: 8px 16px;
+  span {
+    color: var(--c-accent);
+    font-weight: 600;
+  }
+
+  &.today {
+    span {
+      background: var(--c-accent);
+      color: var(--c-bg);
+      padding: 0 5px;
+      border-radius: 4px;
+    }
+  }
+}
+
+.inp-workoutName__box {
+  margin-top: 16px;
+}
+
+.inp-workoutName {
+  border: 0;
+  border-bottom: 2px solid var(--c-border);
+  font-size: 20px;
+  outline: none;
+  transition: all 0.3s;
+  &:focus {
+    border-bottom-color: var(--c-accent);
+  }
+
+  &::placeholder {
+    color: var(--c-text-light);
+    font-size: 16px;
+  }
 }
 
 .title {
@@ -99,9 +139,19 @@ const workoutNameToStore = (value, date) => {
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);
-  padding: 1em 0;
   border-radius: 0.2em;
   background: white;
+}
+
+.workoutName-result {
+  font-weight: 600;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: flex-end;
+  background: var(--c-block-hover);
+  padding: 4px 8px;
 }
 
 .modal-header {

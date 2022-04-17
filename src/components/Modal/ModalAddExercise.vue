@@ -70,10 +70,6 @@ const toExerciseGroup = () => {
 </script>
 
 <style lang="scss" scoped>
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-}
 
 .close {
   background: transparent;

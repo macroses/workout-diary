@@ -9,7 +9,6 @@
     <div class="day-tasks">
       {{ checkEqualDates(day.format('D.MM.Y')) }}
     </div>
-    <div class="empty-area"></div>
   </li>
 </template>
 
@@ -18,7 +17,6 @@ import { useStore } from '@/store'
 import { useDateEquality } from "@/composables/useDate";
 
 const store = useStore()
-
 const props = defineProps({
   days: Array
 })
@@ -68,8 +66,6 @@ li {
   text-align: left;
   font-size: 12px;
   padding: 0 8px;
-  display:grid;
-  grid-template-rows: repeat(5, 1fr);
   background: var(--c-accent);
   color: var(--c-bg)
 }

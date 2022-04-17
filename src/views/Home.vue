@@ -30,9 +30,7 @@ import { useDate } from "@/composables/useDate";
 import { ref } from 'vue';
 
 const days = useDate()
-
 const store = useStore()
-
 let isModalOpen = ref(false)
 
 const toggleModal = (day) => {
