@@ -6,15 +6,18 @@
       @click="toggleModal(day)">
     <span class="day-num">{{ day.format('D') }}</span>
 
-    <div class="day-tasks">
-      {{ checkEqualDates(day.format('D.MM.Y')) }}
+    <div
+        class="day-tasks"
+        v-for="item in checkEqualDates(day.format('D.MM.Y'))"
+        :key="item.id">
+      {{ item.userValue }}
     </div>
   </li>
 </template>
 
 <script setup>
-import { useStore } from '@/store'
-import { useDateEquality } from "@/composables/useDate";
+import {useStore} from '@/store'
+import {useDateEquality} from "@/composables/useDate";
 
 const store = useStore()
 const props = defineProps({
@@ -25,10 +28,11 @@ const emit = defineEmits(['toggleModal'])
 const toggleModal = (value) => emit('toggleModal', value)
 
 const checkEqualDates = (date) => {
-  if(store.userWorkoutName.date === date) {
-    return store.userWorkoutName.userValue
-  }
-  return ''
+  return store.userWorkoutName.filter(el => {
+    if (el.date === date) {
+      return el.userValue
+    }
+  })
 }
 </script>
 
@@ -37,6 +41,13 @@ li {
   border-right: 1px solid var(--c-border);
   border-bottom: 1px solid var(--c-border);
   text-align: center;
+  padding: 3px;
+
+  gap: 1px;
+  display: grid;
+  grid-auto-rows: min-content;
+  height: calc((100vh / 5) - 18px);
+  width: calc((100vw / 7) - 1px);
 
   &:nth-child(7n) {
     border-right: none;
@@ -64,9 +75,14 @@ li {
 
 .day-tasks {
   text-align: left;
-  font-size: 12px;
-  padding: 0 8px;
+  font-size: 11px;
+  padding: 2px 8px;
   background: var(--c-accent);
-  color: var(--c-bg)
+  color: var(--c-bg);
+  height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 2px;
+  cursor: pointer;
 }
 </style>

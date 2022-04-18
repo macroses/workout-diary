@@ -5,30 +5,44 @@
         <div class="layout" @click="close"></div>
         <div class="modal">
           <div class="modal-top">
+            <div
+                class="save-workout-btn"
+                @click="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
+                :class="{saveIcon: workoutName}">
+              <Icon
+                  :iconName="workoutName ? 'circle-check' : 'ban'"
+                  class="check-icon"/>
+              сохранить
+            </div>
+
             <Icon
                 iconName="xmark"
                 @click="close"
                 class="closeIcon"/>
           </div>
+
           <div class="modal-header">
-            <div class="inp-workoutName__box">
+            <div class="inp-workoutName__box" v-if="isWorkoutName">
               <input
+                  v-focus-on-load
                   type="text"
-                  v-if="isWorkoutNameActive"
+
                   v-model="workoutName"
                   placeholder="Название тренировки"
                   @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
                   class="inp-workoutName"/>
-              <div class="workoutName-result" v-else> {{ workoutName }}</div>
+
             </div>
+            <div class="workoutName-result" v-else> {{ workoutName }}</div>
           </div>
+
           <div class="modal-content">
             <div
                 class="day-of-workout__desc"
-                :class="{today: checkDateEqually(dayData)}">
+                :class="{ today: useDateEquality(dayData) }">
                 Дата тренировки:
               <span>
-                {{ checkDateEqually(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
+                {{ useDateEquality(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
               </span>
               </div>
             <slot name="modalContent"></slot>
@@ -41,8 +55,9 @@
 
 <script setup>
 import Icon from '@/components/UI/Icon'
-import moment from "moment";
 import {ref} from "vue";
+import { useDateEquality } from "@/composables/useDate";
+import { vFocusOnLoad } from "@/directives/myDirectives";
 import { useStore } from '@/store'
 
 const props = defineProps({
@@ -52,24 +67,64 @@ const props = defineProps({
   isWorkoutNameActive: Boolean
 })
 
+const workoutName = ref('')
+const isWorkoutName = ref(true)
 const store = useStore()
 
 const emits = defineEmits(['close'])
 const close = () => emits('close')
 
-const checkDateEqually = (day) => moment().isSame(day, 'day')
-
-const workoutName = ref('')
-const isWorkoutNameActive = ref(true)
-
 const workoutNameToStore = (value, date) => {
-  store.userWorkoutName.userValue = value
-  store.userWorkoutName.date = date
-  isWorkoutNameActive.value = false
+  if(!workoutName.value) return
+
+  let lastId = 0
+
+  if(store.userWorkoutName.length) {
+    lastId = store.userWorkoutName[store.userWorkoutName.length - 1].id
+  }
+
+  store.userWorkoutName.push({
+    id: lastId + 1,
+    userValue: value,
+    date: date,
+  })
+  workoutName.value = ''
+
+  close()
 }
+
 </script>
 
 <style lang="scss" scoped>
+.check-icon {
+  width: auto;
+  height: 14px;
+  margin-right: 8px;
+}
+
+.save-workout-btn {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--c-text-light);
+
+  svg {
+    fill: red;
+  }
+
+  &.saveIcon {
+    color: var(--c-text-dark);
+    cursor: pointer;
+
+    svg {
+      fill: var(--c-accent);
+    }
+  }
+}
+
 .layout {
   position: fixed;
   top: 0;
@@ -103,7 +158,7 @@ const workoutNameToStore = (value, date) => {
 
 .inp-workoutName {
   border: 0;
-  border-bottom: 2px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
   font-size: 20px;
   outline: none;
   transition: all 0.3s;
@@ -114,6 +169,7 @@ const workoutNameToStore = (value, date) => {
   &::placeholder {
     color: var(--c-text-light);
     font-size: 16px;
+    font-weight: 300;
   }
 }
 

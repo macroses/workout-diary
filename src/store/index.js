@@ -5,10 +5,7 @@ export const useStore = defineStore('main', {
     return {
       currentDayForCreateWorkout: {},
       usersGroupName: '',
-      userWorkoutName: {
-        userValue: null,
-        date: null
-      }
+      userWorkoutName: []
     }
   }
 })
