@@ -4,36 +4,26 @@
       <div class="modal-box" v-if="isModalActive">
         <div class="layout" @click="close"></div>
         <div class="modal">
-          <div class="modal-top">
-            <div
-                class="save-workout-btn"
-                @click="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
-                :class="{saveIcon: workoutName}">
-              <Icon
-                  :iconName="workoutName ? 'circle-check' : 'ban'"
-                  class="check-icon"/>
-              сохранить
-            </div>
-
-            <Icon
-                iconName="xmark"
-                @click="close"
-                class="closeIcon"/>
-          </div>
+          <ModalTop
+              @close="close"
+              @workoutNameToStore="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
+              :workoutName="workoutName"
+              :dayData="dayData"/>
 
           <div class="modal-header">
-            <div class="inp-workoutName__box" v-if="isWorkoutName">
+            <div
+                class="inp-workoutName__box"
+                v-if="isWorkoutName">
               <input
-                  v-focus-on-load
-                  type="text"
-
                   v-model="workoutName"
+                  v-focus-on-load
+                  class="inp-workoutName"
                   placeholder="Название тренировки"
-                  @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
-                  class="inp-workoutName"/>
-
+                  type="text"
+                  @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"/>
+              <DropdownColor @dropColor="getCurrentColor"/>
             </div>
-            <div class="workoutName-result" v-else> {{ workoutName }}</div>
+            <div v-else class="workoutName-result"> {{ workoutName }}</div>
           </div>
 
           <div class="modal-content">
@@ -54,7 +44,8 @@
 </template>
 
 <script setup>
-import Icon from '@/components/UI/Icon'
+import DropdownColor from "@/components/UI/DropdownColor";
+import ModalTop from "@/components/Modal/ModalTop";
 import {ref} from "vue";
 import { useDateEquality } from "@/composables/useDate";
 import { vFocusOnLoad } from "@/directives/myDirectives";
@@ -74,6 +65,13 @@ const store = useStore()
 const emits = defineEmits(['close'])
 const close = () => emits('close')
 
+let currentColor = ref('')
+
+const getCurrentColor = (e) => {
+  currentColor = e;
+  console.log(currentColor);
+}
+
 const workoutNameToStore = (value, date) => {
   if(!workoutName.value) return
 
@@ -86,6 +84,7 @@ const workoutNameToStore = (value, date) => {
   store.userWorkoutName.push({
     id: lastId + 1,
     userValue: value,
+    color: currentColor,
     date: date,
   })
   workoutName.value = ''
@@ -96,35 +95,6 @@ const workoutNameToStore = (value, date) => {
 </script>
 
 <style lang="scss" scoped>
-.check-icon {
-  width: auto;
-  height: 14px;
-  margin-right: 8px;
-}
-
-.save-workout-btn {
-  display: flex;
-  align-items: center;
-  margin-right: 16px;
-  font-size: 10px;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--c-text-light);
-
-  svg {
-    fill: red;
-  }
-
-  &.saveIcon {
-    color: var(--c-text-dark);
-    cursor: pointer;
-
-    svg {
-      fill: var(--c-accent);
-    }
-  }
-}
-
 .layout {
   position: fixed;
   top: 0;
@@ -154,6 +124,8 @@ const workoutNameToStore = (value, date) => {
 
 .inp-workoutName__box {
   margin-top: 16px;
+  display: flex;
+  gap: 8px;
 }
 
 .inp-workoutName {
@@ -183,9 +155,6 @@ const workoutNameToStore = (value, date) => {
   }
 }
 
-.closeIcon {
-  cursor: pointer;
-}
 
 .modal {
   position: absolute;
@@ -201,13 +170,6 @@ const workoutNameToStore = (value, date) => {
 
 .workoutName-result {
   font-weight: 600;
-}
-
-.modal-top {
-  display: flex;
-  justify-content: flex-end;
-  background: var(--c-block-hover);
-  padding: 4px 8px;
 }
 
 .modal-header {

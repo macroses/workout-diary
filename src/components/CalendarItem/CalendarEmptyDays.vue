@@ -16,5 +16,6 @@ li {
   border-right: 1px solid var(--c-border);
   border-bottom: 1px solid var(--c-border);
   text-align: center;
+
 }
 </style>

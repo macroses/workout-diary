@@ -1,4 +1,4 @@
-import {onMounted, ref} from 'vue'
+import { onMounted, ref } from 'vue'
 
 export function useMenu() {
   const open = ref(false)
