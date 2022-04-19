@@ -11,8 +11,9 @@
       <li
           v-for="colorItem in colorCollection"
           :key="colorItem.id"
-          :style="{backgroundColor: 'rgb(' + colorItem.rgb + ')' }"
-          @click="getCurrentColor(colorItem.rgb)"></li>
+          :style="{ backgroundColor: 'rgb(' + colorItem.rgb + ')' }"
+          @click="dropColor(colorItem.rgb)">
+      </li>
     </ul>
   </div>
 </template>
@@ -34,18 +35,18 @@ const colorCollection = [
   {id: 11, rgb: '97, 97, 97'},
 ]
 
-const emit = defineEmits(['dropColor'])
-const dropColor = () => emit('dropColor', defaultColor.value)
-
 const defaultColor = ref('11, 128, 67')
 const isDropDownActive = ref(false)
 
 const toggleDropdown = () => isDropDownActive.value = !isDropDownActive.value
 
-const getCurrentColor = (color) => {
-  defaultColor.value = color
-  isDropDownActive.value = false
-}
+const emit = defineEmits(['dropColor'])
+const dropColor = (color) => emit(
+    'dropColor',
+    defaultColor.value = color,
+    isDropDownActive.value = false
+)
+
 </script>
 
 <style lang="scss" scoped>

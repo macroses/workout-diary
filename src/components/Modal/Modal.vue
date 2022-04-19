@@ -6,7 +6,7 @@
         <div class="modal">
           <ModalTop
               @close="close"
-              @workoutNameToStore="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"
+              @workoutNameToStore="workoutNameToStore"
               :workoutName="workoutName"
               :dayData="dayData"/>
 
@@ -20,8 +20,8 @@
                   class="inp-workoutName"
                   placeholder="Название тренировки"
                   type="text"
-                  @keydown.enter="workoutNameToStore(workoutName, dayData.format('D.MM.Y'))"/>
-              <DropdownColor @dropColor="getCurrentColor"/>
+                  @keydown.enter="workoutNameToStore"/>
+              <DropdownColor @dropColor="getTaskColor"/>
             </div>
             <div v-else class="workoutName-result"> {{ workoutName }}</div>
           </div>
@@ -46,7 +46,7 @@
 <script setup>
 import DropdownColor from "@/components/UI/DropdownColor";
 import ModalTop from "@/components/Modal/ModalTop";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import { useDateEquality } from "@/composables/useDate";
 import { vFocusOnLoad } from "@/directives/myDirectives";
 import { useStore } from '@/store'
@@ -67,12 +67,11 @@ const close = () => emits('close')
 
 let currentColor = ref('')
 
-const getCurrentColor = (e) => {
-  currentColor = e;
-  console.log(currentColor);
+const getTaskColor = (data) => {
+  currentColor.value = data;
 }
 
-const workoutNameToStore = (value, date) => {
+const workoutNameToStore = () => {
   if(!workoutName.value) return
 
   let lastId = 0
@@ -83,9 +82,9 @@ const workoutNameToStore = (value, date) => {
 
   store.userWorkoutName.push({
     id: lastId + 1,
-    userValue: value,
-    color: currentColor,
-    date: date,
+    userValue: workoutName.value,
+    color: currentColor.value || '11, 128, 67',
+    date: props.dayData.format('D.MM.Y'),
   })
   workoutName.value = ''
 
