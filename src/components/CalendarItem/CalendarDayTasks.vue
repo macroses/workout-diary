@@ -3,7 +3,7 @@
       class="day-tasks"
       v-for="item in checkEqualDates(day.format('D.MM.Y'))"
       :key="item.id"
-      :style="{backgroundColor: 'rgb(' + item.color + ')'}"
+      :style="{backgroundColor: 'rgba(' + item.color + ', 0.5)'}"
       @contextmenu.prevent="deleteWorkoutItem(item.id)">
     {{ item.userValue }}
   </div>
