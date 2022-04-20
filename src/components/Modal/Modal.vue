@@ -8,7 +8,8 @@
               @close="close"
               @workoutNameToStore="workoutNameToStore"
               :workoutName="workoutName"
-              :dayData="dayData"/>
+              :dayData="dayData"
+          />
 
           <div class="modal-header">
             <div
@@ -23,7 +24,6 @@
                   @keydown.enter="workoutNameToStore"/>
               <DropdownColor @dropColor="getTaskColor"/>
             </div>
-            <div v-else class="workoutName-result"> {{ workoutName }}</div>
           </div>
 
           <div class="modal-content">
@@ -55,7 +55,8 @@ const props = defineProps({
   isModalActive: Boolean,
   title: String,
   dayData: Object,
-  isWorkoutNameActive: Boolean
+  isWorkoutNameActive: Boolean,
+  isNewGroupActive: Boolean,
 })
 
 const workoutName = ref('')
@@ -85,6 +86,7 @@ const workoutNameToStore = () => {
     userValue: workoutName.value,
     color: currentColor.value || '11, 128, 67',
     date: props.dayData.format('D.MM.Y'),
+    exercises: []
   })
   workoutName.value = ''
 
@@ -165,10 +167,6 @@ const workoutNameToStore = () => {
   transform: translate(-50%,-50%);
   border-radius: 0.2em;
   background: white;
-}
-
-.workoutName-result {
-  font-weight: 600;
 }
 
 .modal-header {

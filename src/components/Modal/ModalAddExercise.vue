@@ -1,17 +1,19 @@
 <template>
   <div class="exercise-category">
     <ul
-      v-if="!isNewGroupFormVisible" 
+      v-if="!isNewGroupVisible"
       class="groups">
       <li 
-        v-for="exerciseGroup in exerciseGroups" 
+        v-for="exerciseGroup in exerciseGroups"
         :key="exerciseGroup.id"
-        class="exercisegroup-item">
+        @click="logData(exerciseGroup.id)"
+        class="exercisegroup-item"
+      >
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
       </li>
       <li 
-        @click="createCategoryForm"
+        @click="isNewGroup"
         class="exercisegroup-item">
         <Icon iconName="plus"/>
         Добавить свою группу
@@ -26,12 +28,14 @@
         :inputValue="usersInputValue"
         pholder="Название группы" />
       <div class="btn-group">
-        <Button @click="createCategoryForm">Отменить</Button>
+        <Button @click="isNewGroup">Отменить</Button>
         <Button
             :accentColor="true"
             @click="toExerciseGroup">Сохранить</Button>
       </div>
     </div>
+
+    <ModalSelectExerciseItem />
   </div>
 </template>
 
@@ -42,13 +46,18 @@ import { onMounted, ref } from 'vue'
 import Button from '@/components/UI/Button.vue';
 import InputText from '@/components/UI/InputText.vue';
 import { useStore } from '@/store';
+import ModalSelectExerciseItem from "@/components/Modal/ModalSelectExerciseItem";
 
 let usersInputValue = ref('')
-let isNewGroupFormVisible = ref(false)
+let isNewGroupVisible = ref(false)
 let exerciseGroups = ref([])
+
 onMounted(async() => exerciseGroups.value = await Exercises.getExercisesGroup())
 
-const createCategoryForm = () => isNewGroupFormVisible.value = !isNewGroupFormVisible.value
+const emit = defineEmits(['isNewGroup'])
+const isNewGroup = () => {
+  emit('isNewGroup', isNewGroupVisible.value = !isNewGroupVisible.value)
+}
 
 const store = useStore()
 
@@ -65,8 +74,10 @@ const toExerciseGroup = () => {
       iconName: ''
     }
   ]
-  isNewGroupFormVisible.value = false
+  isNewGroupVisible.value = false
 }
+
+const logData = (id) => console.log(id)
 </script>
 
 <style lang="scss" scoped>
@@ -84,14 +95,16 @@ const toExerciseGroup = () => {
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  font-weight: 500;
   cursor: pointer;
+  font-size: 12px;
   &:hover {
     background-color: var(--c-block-hover);
   }
 
   svg {
     margin-right: 16px;
+    width: 18px;
+    height: 18px;
   }
 }
 

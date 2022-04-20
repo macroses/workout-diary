@@ -1,6 +1,7 @@
 <template>
   <div class="modal-top">
     <div
+        v-if="!isNewGroupActive"
         :class="{saveIcon: workoutName}"
         class="save-workout-btn"
         @click="workoutNameToStore">
@@ -23,7 +24,7 @@ import { useStore } from '@/store'
 
 const props = defineProps({
   workoutName: String,
-  dayData: Object
+  dayData: Object,
 })
 
 const emit = defineEmits(['workoutNameToStore', 'close'])

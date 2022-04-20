@@ -9,7 +9,7 @@
     {"id": 7, "groupName": "Фуллбоди", "iconName": "person"},
     {"id": 8, "groupName": "Кардио", "iconName": "heart-pulse"}
   ],
-  "exercises": {
-
-  }
+  "exercises": [
+    {"id": 1, "categoryId": "1"}
+  ]
 }

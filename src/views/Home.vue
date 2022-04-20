@@ -11,9 +11,10 @@
     <Modal
         :dayData="store.currentDayForCreateWorkout"
         :isModalActive="isModalOpen"
+        :isNewGroupActive="isNewGroupActive"
         @close="toggleModal">
         <template #modalContent>
-          <ModalAddExercise />
+          <ModalAddExercise @isNewGroup="toggleNewGroup"/>
         </template>
     </Modal>
   </div>
@@ -32,10 +33,15 @@ import { ref } from 'vue';
 const days = useDate()
 const store = useStore()
 let isModalOpen = ref(false)
+let isNewGroupActive = ref(false)
 
 const toggleModal = (day) => {
   isModalOpen.value = !isModalOpen.value
   store.currentDayForCreateWorkout = day
+}
+
+const toggleNewGroup = (e) => {
+  isNewGroupActive.value = e
 }
 </script>
 
