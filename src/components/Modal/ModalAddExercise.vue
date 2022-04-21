@@ -6,7 +6,7 @@
       <li 
         v-for="exerciseGroup in exerciseGroups"
         :key="exerciseGroup.id"
-        @click="logData(exerciseGroup.id)"
+        @click="selectGroupId(exerciseGroup.id)"
         class="exercisegroup-item"
       >
         <Icon :iconName="exerciseGroup.iconName"/>
@@ -34,8 +34,8 @@
             @click="toExerciseGroup">Сохранить</Button>
       </div>
     </div>
-
-    <ModalSelectExerciseItem />
+<!--    {{exercisesList}}-->
+    <ModalExercisesList :groupId="exercisesGroupId"/>
   </div>
 </template>
 
@@ -46,13 +46,18 @@ import { onMounted, ref } from 'vue'
 import Button from '@/components/UI/Button.vue';
 import InputText from '@/components/UI/InputText.vue';
 import { useStore } from '@/store';
-import ModalSelectExerciseItem from "@/components/Modal/ModalSelectExerciseItem";
+import ModalExercisesList from "@/components/Modal/ModalExercisesList";
 
 let usersInputValue = ref('')
 let isNewGroupVisible = ref(false)
 let exerciseGroups = ref([])
+let exercisesList = ref([])
+let exercisesGroupId= ref(null)
 
-onMounted(async() => exerciseGroups.value = await Exercises.getExercisesGroup())
+onMounted(async() => {
+  exerciseGroups.value = await Exercises.getExercisesGroup()
+  exercisesList.value = await  Exercises.getExercisesList()
+})
 
 const emit = defineEmits(['isNewGroup'])
 const isNewGroup = () => {
@@ -77,7 +82,9 @@ const toExerciseGroup = () => {
   isNewGroupVisible.value = false
 }
 
-const logData = (id) => console.log(id)
+const selectGroupId = (id) => {
+  exercisesGroupId.value = id
+}
 </script>
 
 <style lang="scss" scoped>

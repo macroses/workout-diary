@@ -10,6 +10,53 @@
     {"id": 8, "groupName": "Кардио", "iconName": "heart-pulse"}
   ],
   "exercises": [
-    {"id": 1, "categoryId": "1"}
+    {
+      "id": 1,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Жим штанги лежа · накл"
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Жим гантелей лежа"
+    },
+    {
+      "id": 3,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Жим в Смите лежа"
+    },
+    {
+      "id": 4,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Разведение гантелей"
+    },
+    {
+      "id": 5,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Отжимания"
+    },
+    {
+      "id": 6,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Жим в хаммере"
+    },
+    {
+      "id": 7,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Пуловер со штангой"
+    },
+    {
+      "id": 7,
+      "categoryId": 1,
+      "area": "mid",
+      "name": "Пуловер с гантелью"
+    }
   ]
 }
