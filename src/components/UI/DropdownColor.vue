@@ -1,5 +1,6 @@
 <template>
   <div class="dropdown-color__container">
+    <div class="title">цвет задачи</div>
     <div
         @click="toggleDropdown"
         class="dropdown-color__result"
@@ -9,10 +10,12 @@
         v-if="isDropDownActive"
         class="dropdown-color">
       <li
-          v-for="colorItem in colorCollection"
-          :key="colorItem.id"
-          :style="{ backgroundColor: 'rgb(' + colorItem.rgb + ')' }"
-          @click="dropColor(colorItem.rgb)">
+        v-for="colorItem in colorCollection"
+        :key="colorItem.id"
+        :style="{ backgroundColor: 'rgb(' + colorItem.rgb + ')' }"
+        @click="dropColor(colorItem.rgb)"
+        :class="{ active: colorItem.rgb === defaultColor }"
+      >
       </li>
     </ul>
   </div>
@@ -40,6 +43,10 @@ const isDropDownActive = ref(false)
 
 const toggleDropdown = () => isDropDownActive.value = !isDropDownActive.value
 
+const colorEquality = (color) => {
+
+}
+
 const emit = defineEmits(['dropColor'])
 const dropColor = (color) => emit(
     'dropColor',
@@ -52,6 +59,10 @@ const dropColor = (color) => emit(
 <style lang="scss" scoped>
 .dropdown-color__container {
   position: relative;
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  padding: 0 16px;
 }
 
 .dropdown-color__result {
@@ -59,20 +70,24 @@ const dropColor = (color) => emit(
   height: 18px;
   border-radius: 50%;
   cursor: pointer;
+  border: 2px solid var(--c-bg);
+  outline: 1px solid var(--c-border);
+
 }
 
 .dropdown-color {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  max-width: 60px;
 
   border-radius: 4px;
   min-width: 60px;
   padding: 8px;
   background: var(--c-bg);
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 12px;
+  left: 32px;
   z-index: 2;
   box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%),
               0px 3px 14px 2px rgb(0 0 0 / 12%),
@@ -88,5 +103,24 @@ const dropColor = (color) => emit(
       transform: scale(1.1);
     }
   }
+
+  .active {
+    position: relative;
+    &:after {
+      content: '\2713';
+      position: absolute;
+      color: #fff;
+      font-weight: bold;
+      font-size: 10px;
+      top: 2px;
+      left: 5px;
+    }
+  }
+}
+
+.title {
+  color: var(--c-text-light);
+  font-size: 12px;
+  margin-right: 8px;
 }
 </style>

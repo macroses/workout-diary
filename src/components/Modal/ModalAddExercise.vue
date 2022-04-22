@@ -4,10 +4,11 @@
       v-if="!isNewGroupVisible"
       class="groups">
       <li 
-        v-for="exerciseGroup in exerciseGroups"
+        v-for="(exerciseGroup, index) in exerciseGroups"
         :key="exerciseGroup.id"
-        @click="selectGroupId(exerciseGroup.id)"
+        @click="selectGroupId(exerciseGroup.id, index)"
         class="exercisegroup-item"
+        :class="{active: index === activeGroupNameItem}"
       >
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
@@ -34,8 +35,11 @@
             @click="toExerciseGroup">Сохранить</Button>
       </div>
     </div>
-<!--    {{exercisesList}}-->
-    <ModalExercisesList :groupId="exercisesGroupId"/>
+
+    <ModalExercisesList 
+      :groupId="exercisesGroupId"
+      :exercisesList="exercisesList"
+    />
   </div>
 </template>
 
@@ -52,7 +56,8 @@ let usersInputValue = ref('')
 let isNewGroupVisible = ref(false)
 let exerciseGroups = ref([])
 let exercisesList = ref([])
-let exercisesGroupId= ref(null)
+let exercisesGroupId = ref(0)
+let activeGroupNameItem = ref(null)
 
 onMounted(async() => {
   exerciseGroups.value = await Exercises.getExercisesGroup()
@@ -82,20 +87,22 @@ const toExerciseGroup = () => {
   isNewGroupVisible.value = false
 }
 
-const selectGroupId = (id) => {
+const selectGroupId = (id, i) => {
   exercisesGroupId.value = id
+  activeGroupNameItem.value = i
+
 }
 </script>
 
 <style lang="scss" scoped>
+.exercise-category {
+  display: flex;
+  margin-top: 16px;
+}
 
 .close {
   background: transparent;
   border: none;
-}
-
-.groups {
-  margin-top: 16px;
 }
 
 .exercisegroup-item {
@@ -113,6 +120,19 @@ const selectGroupId = (id) => {
     width: 18px;
     height: 18px;
   }
+
+  &.active {
+    background: var(--c-accent);
+    color: var(--c-bg);
+
+    svg {
+      fill: var(--c-bg);
+    }
+  }
+}
+
+.groups {
+  min-width: 200px;
 }
 
 .createCategoryForm {

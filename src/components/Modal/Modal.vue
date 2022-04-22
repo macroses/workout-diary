@@ -22,11 +22,13 @@
                   placeholder="Название тренировки"
                   type="text"
                   @keydown.enter="workoutNameToStore"/>
-              <DropdownColor @dropColor="getTaskColor"/>
+              
             </div>
+            
           </div>
 
           <div class="modal-content">
+            <DropdownColor @dropColor="getTaskColor"/>
             <div
                 class="day-of-workout__desc"
                 :class="{ today: useDateEquality(dayData) }">
@@ -108,6 +110,7 @@ const workoutNameToStore = () => {
 .day-of-workout__desc {
   font-size: 12px;
   padding: 8px 16px;
+  color: var(--c-text-light);
   span {
     color: var(--c-accent);
     font-weight: 600;
@@ -127,12 +130,15 @@ const workoutNameToStore = () => {
   margin-top: 16px;
   display: flex;
   gap: 8px;
+  flex: 1;
 }
 
 .inp-workoutName {
   border: 0;
+  width: 100%;
   border-bottom: 1px solid var(--c-border);
-  font-size: 20px;
+  padding: 4px 0;
+  font-size: 14px;
   outline: none;
   transition: all 0.3s;
   &:focus {
@@ -141,7 +147,7 @@ const workoutNameToStore = () => {
 
   &::placeholder {
     color: var(--c-text-light);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
   }
 }
@@ -167,6 +173,7 @@ const workoutNameToStore = () => {
   transform: translate(-50%,-50%);
   border-radius: 0.2em;
   background: white;
+  border-radius: 8px;
 }
 
 .modal-header {

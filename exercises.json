@@ -57,6 +57,13 @@
       "categoryId": 1,
       "area": "mid",
       "name": "Пуловер с гантелью"
+    },
+
+    {
+      "id": 8,
+      "categoryId": 2,
+      "area": "mid",
+      "name": "Тяга верхнего блока"
     }
   ]
 }

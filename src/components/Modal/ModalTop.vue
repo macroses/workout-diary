@@ -37,7 +37,7 @@ const close = () => emit('close')
   display: flex;
   justify-content: flex-end;
   background: var(--c-block-hover);
-  padding: 4px 8px;
+  padding: 12px 8px;
 }
 
 .save-workout-btn {
