@@ -37,7 +37,7 @@
                 {{ useDateEquality(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
               </span>
               </div>
-            <slot name="modalContent"></slot>
+            <ModalAddExercise @isNewGroup="toggleNewGroup"/>
           </div>
         </div>
       </div>
@@ -52,6 +52,7 @@ import { ref } from "vue";
 import { useDateEquality } from "@/composables/useDate";
 import { vFocusOnLoad } from "@/directives/myDirectives";
 import { useStore } from '@/store'
+import ModalAddExercise from "@/components/Modal/ModalAddExercise";
 
 const props = defineProps({
   isModalActive: Boolean,
@@ -63,12 +64,13 @@ const props = defineProps({
 
 const workoutName = ref('')
 const isWorkoutName = ref(true)
+let currentColor = ref('')
+
 const store = useStore()
 
 const emits = defineEmits(['close'])
-const close = () => emits('close')
 
-let currentColor = ref('')
+const close = () => emits('close')
 
 const getTaskColor = (data) => {
   currentColor.value = data;

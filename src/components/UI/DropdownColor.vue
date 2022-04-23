@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown-color__container">
+  <div ref="container" class="dropdown-color__container">
     <div class="title">цвет задачи</div>
     <div
         @click="toggleDropdown"
@@ -24,6 +24,7 @@
 <script setup>
 import { ref } from "vue";
 import {useStore} from "@/store";
+import {useOnClickOutside} from "@/composables/useClickOutside";
 
 const colorCollection = [
   {id: 1, rgb: '213, 0, 0'},
@@ -40,6 +41,7 @@ const colorCollection = [
 ]
 
 const store = useStore()
+const container = ref(null)
 
 const defaultColor = ref('11, 128, 67')
 const isDropDownActive = ref(false)
@@ -52,6 +54,7 @@ const dropColor = (color) => {
   isDropDownActive.value = false
 }
 
+useOnClickOutside(container, () => isDropDownActive.value = false)
 </script>
 
 <style lang="scss" scoped>
