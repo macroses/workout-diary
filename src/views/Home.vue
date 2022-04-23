@@ -38,6 +38,7 @@ let isNewGroupActive = ref(false)
 const toggleModal = (day) => {
   isModalOpen.value = !isModalOpen.value
   store.currentDayForCreateWorkout = day
+  store.currentTaskColor = '11, 128, 67'
 }
 
 const toggleNewGroup = (e) => {

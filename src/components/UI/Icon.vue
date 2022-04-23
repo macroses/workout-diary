@@ -1,6 +1,6 @@
 <template>
   <svg viewBox="0 0 24 24">
-    <use :xlink:href="`/thin.svg#${iconName}`"></use>
+    <use :xlink:href="`/light.svg#${iconName}`"></use>
   </svg>
 </template>
 

@@ -23,6 +23,7 @@
 
 <script setup>
 import { ref } from "vue";
+import {useStore} from "@/store";
 
 const colorCollection = [
   {id: 1, rgb: '213, 0, 0'},
@@ -38,21 +39,18 @@ const colorCollection = [
   {id: 11, rgb: '97, 97, 97'},
 ]
 
+const store = useStore()
+
 const defaultColor = ref('11, 128, 67')
 const isDropDownActive = ref(false)
 
 const toggleDropdown = () => isDropDownActive.value = !isDropDownActive.value
 
-const colorEquality = (color) => {
-
+const dropColor = (color) => {
+  store.currentTaskColor = color
+  defaultColor.value = color
+  isDropDownActive.value = false
 }
-
-const emit = defineEmits(['dropColor'])
-const dropColor = (color) => emit(
-    'dropColor',
-    defaultColor.value = color,
-    isDropDownActive.value = false
-)
 
 </script>
 

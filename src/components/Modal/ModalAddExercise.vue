@@ -9,6 +9,7 @@
         @click="selectGroupId(exerciseGroup.id, index)"
         class="exercisegroup-item"
         :class="{active: index === activeGroupNameItem}"
+        :style="[index === activeGroupNameItem ? `background-color: rgb(${store.currentTaskColor})`: ''] "
       >
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
@@ -36,10 +37,11 @@
       </div>
     </div>
 
-    <ModalExercisesList 
+    <ModalExercisesList
       :groupId="exercisesGroupId"
       :exercisesList="exercisesList"
     />
+    <ModelChosenExercises />
   </div>
 </template>
 
@@ -51,6 +53,7 @@ import Button from '@/components/UI/Button.vue';
 import InputText from '@/components/UI/InputText.vue';
 import { useStore } from '@/store';
 import ModalExercisesList from "@/components/Modal/ModalExercisesList";
+import ModelChosenExercises from "@/components/Modal/ModelChosenExercises";
 
 let usersInputValue = ref('')
 let isNewGroupVisible = ref(false)
@@ -58,6 +61,8 @@ let exerciseGroups = ref([])
 let exercisesList = ref([])
 let exercisesGroupId = ref(0)
 let activeGroupNameItem = ref(null)
+
+const store = useStore()
 
 onMounted(async() => {
   exerciseGroups.value = await Exercises.getExercisesGroup()
@@ -69,7 +74,7 @@ const isNewGroup = () => {
   emit('isNewGroup', isNewGroupVisible.value = !isNewGroupVisible.value)
 }
 
-const store = useStore()
+
 
 const dropUsersGroupNameToStore = (value) => {
   store.usersGroupName = value
@@ -98,6 +103,7 @@ const selectGroupId = (id, i) => {
 .exercise-category {
   display: flex;
   margin-top: 16px;
+  border-top: 1px solid var(--c-border);
 }
 
 .close {
@@ -122,7 +128,6 @@ const selectGroupId = (id, i) => {
   }
 
   &.active {
-    background: var(--c-accent);
     color: var(--c-bg);
 
     svg {

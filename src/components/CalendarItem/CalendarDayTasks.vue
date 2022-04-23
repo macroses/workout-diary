@@ -17,7 +17,7 @@ const props = defineProps({day: Object})
 const store = useStore()
 
 const checkEqualDates = (date) => {
-  return store.userWorkoutName.filter(el => {
+  return store.userWorkout.filter(el => {
     if (el.date === date) {
       return el.userValue
     }
@@ -25,10 +25,10 @@ const checkEqualDates = (date) => {
 }
 
 const deleteWorkoutItem = (id) => {
-  const name = store.userWorkoutName.find(el => el.id === id)
+  const name = store.userWorkout.find(el => el.id === id)
 
   if(confirm(`Удалить тренировку ${name.userValue}`)) {
-    store.userWorkoutName = store.userWorkoutName.filter(el => el.id !== id);
+    store.userWorkout = store.userWorkout.filter(el => el.id !== id);
   }
 }
 </script>

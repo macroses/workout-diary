@@ -48,7 +48,7 @@
 <script setup>
 import DropdownColor from "@/components/UI/DropdownColor";
 import ModalTop from "@/components/Modal/ModalTop";
-import {onMounted, ref} from "vue";
+import { ref } from "vue";
 import { useDateEquality } from "@/composables/useDate";
 import { vFocusOnLoad } from "@/directives/myDirectives";
 import { useStore } from '@/store'
@@ -79,18 +79,20 @@ const workoutNameToStore = () => {
 
   let lastId = 0
 
-  if(store.userWorkoutName.length) {
-    lastId = store.userWorkoutName[store.userWorkoutName.length - 1].id
+  if(store.userWorkout.length) {
+    lastId = store.userWorkout[store.userWorkout.length - 1].id
   }
 
-  store.userWorkoutName.push({
+  store.userWorkout.push({
     id: lastId + 1,
     userValue: workoutName.value,
-    color: currentColor.value || '11, 128, 67',
+    color: store.currentTaskColor,
     date: props.dayData.format('D.MM.Y'),
-    exercises: []
+    exercises: store.currentExercise
   })
   workoutName.value = ''
+  store.currentExercise = []
+  store.currentTaskColor = '11, 128, 67'
 
   close()
 }
@@ -167,7 +169,6 @@ const workoutNameToStore = () => {
   position: absolute;
   left: 50%; 
   top: 50%;
-  max-width: 32em;
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);

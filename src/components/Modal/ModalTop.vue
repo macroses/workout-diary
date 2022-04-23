@@ -1,14 +1,16 @@
 <template>
-  <div class="modal-top">
+  <div
+      class="modal-top"
+      :style="{backgroundColor: 'rgb(' + store.currentTaskColor + ')' }"
+  >
     <div
-        v-if="!isNewGroupActive"
         :class="{saveIcon: workoutName}"
         class="save-workout-btn"
         @click="workoutNameToStore">
-      <Icon
-          :iconName="workoutName ? 'circle-check' : 'ban'"
-          class="check-icon"/>
       сохранить
+      <Icon v-if="workoutName"
+          iconName="floppy-disk"
+          class="check-icon"/>
     </div>
 
     <Icon
@@ -27,6 +29,8 @@ const props = defineProps({
   dayData: Object,
 })
 
+const store = useStore()
+
 const emit = defineEmits(['workoutNameToStore', 'close'])
 const workoutNameToStore = () => emit('workoutNameToStore')
 const close = () => emit('close')
@@ -35,9 +39,8 @@ const close = () => emit('close')
 <style lang="scss" scoped>
 .modal-top {
   display: flex;
-  justify-content: flex-end;
-  background: var(--c-block-hover);
-  padding: 12px 8px;
+  justify-content: space-between;
+  padding: 12px 16px;
 }
 
 .save-workout-btn {
@@ -49,27 +52,21 @@ const close = () => emit('close')
   font-weight: 600;
   color: var(--c-text-light);
 
-  svg {
-    fill: red;
-  }
-
   &.saveIcon {
-    color: var(--c-text-dark);
+    color: var(--c-bg);
     cursor: pointer;
-
-    svg {
-      fill: var(--c-accent);
-    }
   }
 }
 
 .check-icon {
-  width: auto;
-  height: 14px;
-  margin-right: 8px;
+  fill: var(--c-bg);
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
 }
 
 .closeIcon {
   cursor: pointer;
+  fill: var(--c-bg);
 }
 </style>

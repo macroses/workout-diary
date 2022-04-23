@@ -5,7 +5,9 @@ export const useStore = defineStore('main', {
     return {
       currentDayForCreateWorkout: {},
       usersGroupName: '',
-      userWorkoutName: []
+      userWorkout: [],
+      currentExercise: [],
+      currentTaskColor: '' || '11, 128, 67'
     }
   }
 })
