@@ -69,11 +69,11 @@ onMounted(async() => {
   exercisesList.value = await  Exercises.getExercisesList()
 })
 
-const emit = defineEmits(['isNewGroup'])
-const isNewGroup = () => {
-  emit('isNewGroup', isNewGroupVisible.value = !isNewGroupVisible.value)
-}
-
+// const emit = defineEmits(['isNewGroup'])
+// const isNewGroup = () => {
+//   emit('isNewGroup', isNewGroupVisible.value = !isNewGroupVisible.value)
+// }
+//
 
 
 const dropUsersGroupNameToStore = (value) => {

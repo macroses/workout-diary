@@ -1,28 +1,20 @@
 <template>
   <div class="calendar-layout">
-
     <WeekDays/>
-
     <ul class="days">
       <CalendarEmptyDays/>
       <CalendarDates :days="days" @toggleModal="toggleModal"/>
     </ul>
-
     <Modal
         :dayData="store.currentDayForCreateWorkout"
         :isModalActive="isModalOpen"
         :isNewGroupActive="isNewGroupActive"
-        @close="toggleModal">
-<!--        <template #modalContent>-->
-<!--          <ModalAddExercise @isNewGroup="toggleNewGroup"/>-->
-<!--        </template>-->
-    </Modal>
+        @close="toggleModal" />
   </div>
 </template>
 
 <script setup>
 import Modal from '@/components/Modal/Modal'
-// import ModalAddExercise from '@/components/Modal/ModalAddExercise'
 import CalendarEmptyDays from "@/components/CalendarItem/CalendarEmptyDays";
 import CalendarDates from "@/components/CalendarItem/CalendarDates";
 import WeekDays from "@/components/CalendarItem/WeekDays";
@@ -41,9 +33,6 @@ const toggleModal = (day) => {
   store.currentTaskColor = '11, 128, 67'
 }
 
-// const toggleNewGroup = (e) => {
-//   isNewGroupActive.value = e
-// }
 </script>
 
 <style lang="scss" scoped>
