@@ -15,56 +15,64 @@
       "categoryId": 1,
       "area": "mid",
       "name": "Жим штанги лежа · накл",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 2,
       "categoryId": 1,
       "area": "mid",
       "name": "Жим гантелей лежа",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 3,
       "categoryId": 1,
       "area": "mid",
       "name": "Жим в Смите лежа",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 4,
       "categoryId": 1,
       "area": "mid",
       "name": "Разведение гантелей",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 5,
       "categoryId": 1,
       "area": "mid",
       "name": "Отжимания",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 6,
       "categoryId": 1,
       "area": "mid",
       "name": "Жим в хаммере",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 7,
       "categoryId": 1,
       "area": "mid",
       "name": "Пуловер со штангой",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
     {
       "id": 7,
       "categoryId": 1,
       "area": "mid",
       "name": "Пуловер с гантелью",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     },
 
     {
@@ -72,7 +80,8 @@
       "categoryId": 2,
       "area": "mid",
       "name": "Тяга верхнего блока",
-      "isSelected": false
+      "isSelected": false,
+      "isSettingActive": false
     }
   ]
 }

@@ -4,6 +4,10 @@
   </transition>
 </template>
 
+<script setup>
+
+</script>
+
 <style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {

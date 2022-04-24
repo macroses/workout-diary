@@ -69,13 +69,6 @@ onMounted(async() => {
   exercisesList.value = await  Exercises.getExercisesList()
 })
 
-// const emit = defineEmits(['isNewGroup'])
-// const isNewGroup = () => {
-//   emit('isNewGroup', isNewGroupVisible.value = !isNewGroupVisible.value)
-// }
-//
-
-
 const dropUsersGroupNameToStore = (value) => {
   store.usersGroupName = value
 }
@@ -95,7 +88,6 @@ const toExerciseGroup = () => {
 const selectGroupId = (id, i) => {
   exercisesGroupId.value = id
   activeGroupNameItem.value = i
-
 }
 </script>
 

@@ -38,7 +38,6 @@ let currentList = ref([])
 const selectExerciseId = (exercise) => {
   exercise.isSelected = !exercise.isSelected
 
-
   if(!store.currentExercise.includes(exercise)) {
     store.currentExercise = [...store.currentExercise ,exercise]
   }

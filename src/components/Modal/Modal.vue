@@ -68,7 +68,7 @@ const workoutNameToStore = () => {
     userValue: workoutName.value,
     color: store.currentTaskColor,
     date: props.dayData.format('D.MM.Y'),
-    exercises: store.currentExercise
+    exercises: store.currentExercise,
   })
   workoutName.value = ''
   store.currentExercise = []
