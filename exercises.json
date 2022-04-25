@@ -16,7 +16,8 @@
       "area": "mid",
       "name": "Жим штанги лежа · накл",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 2,
@@ -24,7 +25,8 @@
       "area": "mid",
       "name": "Жим гантелей лежа",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 3,
@@ -32,7 +34,8 @@
       "area": "mid",
       "name": "Жим в Смите лежа",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 4,
@@ -40,7 +43,8 @@
       "area": "mid",
       "name": "Разведение гантелей",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 5,
@@ -48,7 +52,8 @@
       "area": "mid",
       "name": "Отжимания",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 6,
@@ -56,7 +61,8 @@
       "area": "mid",
       "name": "Жим в хаммере",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 7,
@@ -64,7 +70,8 @@
       "area": "mid",
       "name": "Пуловер со штангой",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
     {
       "id": 7,
@@ -72,7 +79,8 @@
       "area": "mid",
       "name": "Пуловер с гантелью",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     },
 
     {
@@ -81,7 +89,8 @@
       "area": "mid",
       "name": "Тяга верхнего блока",
       "isSelected": false,
-      "isSettingActive": false
+      "isSettingActive": false,
+      "approaches": []
     }
   ]
 }

@@ -1,17 +1,37 @@
 <template>
   <div class="settings-inputs">
     <div>
-      <input type="text" placeholder="кг" @keydown="useOnlyNumbers">
+      <input
+          type="text"
+          placeholder="кг"
+          @input="updateWeight"
+          @keydown="useOnlyNumbers"
+          :value="weight"
+      >
     </div>
     <div>
-      <input type="text" placeholder="повт." @keydown="useOnlyNumbers">
+      <input
+          type="text"
+          placeholder="повт"
+          @input="updateRepeats"
+          @keydown="useOnlyNumbers"
+          :value="repeats"
+      >
     </div>
   </div>
 </template>
 
 <script setup>
-import {useOnlyNumbers} from "@/composables/useOnlyNumbers"
+import { useOnlyNumbers } from "@/composables/useOnlyNumbers"
 
+const props = defineProps({
+  weight: String,
+  repeats: String,
+})
+
+const emit = defineEmits(['updateWeight', 'updateRepeats'])
+const updateWeight = (event) => emit('update:weight', event.target.value)
+const updateRepeats = (event) => emit('update:repeats', event.target.value)
 </script>
 
 <style lang="scss" scoped>
