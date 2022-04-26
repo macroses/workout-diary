@@ -1,7 +1,5 @@
 <template>
-  <div class="empty-title">
-
-  </div>
+  <div class="empty-title"></div>
   <ul class="exercises-list">
     <li
         v-for="(exercise) in currentList"
@@ -11,7 +9,6 @@
         :style="[ exercise.isSelected ? activeColorObj: '' ]"
     >
       {{ exercise.name }}
-      <Icon iconName=""/>
     </li>
   </ul>
 </template>
@@ -68,7 +65,7 @@ watch(() => store.currentTaskColor, (value) => {
 .exercises-list__item {
   display: flex;
   align-items: center;
-  padding: 5px 16px;
+  padding: 9px 16px;
   cursor: pointer;
   font-size: 12px;
   white-space: nowrap;
