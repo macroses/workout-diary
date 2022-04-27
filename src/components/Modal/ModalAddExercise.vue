@@ -14,12 +14,8 @@
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
       </li>
-      <li 
-        @click="isNewGroup"
-        class="exercisegroup-item">
-        <Icon iconName="plus"/>
-        Добавить свою группу
-      </li>
+
+      <ExerciseAddGroup @isNewGroup="isNewGroup"/>
     </ul>
 
     <div 
@@ -54,6 +50,8 @@ import InputText from '@/components/UI/InputText.vue';
 import { useStore } from '@/store';
 import ModalExercisesList from "@/components/Modal/ModalExercisesList";
 import ModelChosenExercises from "@/components/Modal/ModelChosenExercises";
+import ExerciseAddGroup from "@/components/Modal/ExerciseCategory/ExerciseAddGroup";
+import ExerciseGroupItem from "@/components/Modal/ExerciseCategory/ExerciseGroupItem";
 
 let usersInputValue = ref('')
 let isNewGroupVisible = ref(false)
