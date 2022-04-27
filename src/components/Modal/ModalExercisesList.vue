@@ -58,7 +58,7 @@ watch(() => store.currentTaskColor, (value) => {
 
 <style scoped lang="scss">
 .exercises-list {
-  width: 200px;
+  width: 250px;
   border-left: 1px solid var(--c-border);
 }
 
@@ -67,7 +67,7 @@ watch(() => store.currentTaskColor, (value) => {
   align-items: center;
   padding: 9px 16px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

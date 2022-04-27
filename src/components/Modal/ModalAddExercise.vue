@@ -108,7 +108,7 @@ const selectGroupId = (id, i) => {
   align-items: center;
   padding: 8px 16px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   &:hover {
     background-color: var(--c-block-hover);
   }
@@ -129,7 +129,7 @@ const selectGroupId = (id, i) => {
 }
 
 .groups {
-  min-width: 200px;
+  min-width: 250px;
 }
 
 .createCategoryForm {

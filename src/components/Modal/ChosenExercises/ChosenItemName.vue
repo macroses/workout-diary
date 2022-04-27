@@ -2,7 +2,7 @@
   <div class="name">
     {{exercise.name}}
     <div class="icon-area"
-         @click="openSetSettings"
+      @click="openSetSettings"
     >
       <Icon iconName="plus"/>
     </div>
@@ -22,7 +22,7 @@ const openSetSettings = () => emit('openSetSettings')
 
 <style lang="scss" scoped>
 .name {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   background: var(--c-block-hover);
   display: flex;

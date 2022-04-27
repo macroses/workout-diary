@@ -8,8 +8,7 @@
         :exercise="exercise"
         @openSetSettings="openSetSettings(exercise)"
       />
-<!--которые пришли отсюда сверху-->
-<!--      сюда айди упражнения передать-->
+      
       <ChosenSettings
         :settings="exercise"
         :currentId="currentExerciseId"
@@ -48,7 +47,7 @@ const store = useStore()
 
 const weightSetData = ref('')
 const repeatsSetData = ref('')
-// const setType = ref('')
+let setType = null
 
 const currentExerciseId = ref(0)
 
@@ -58,16 +57,18 @@ const clear = () => {
 }
 
 const openSetSettings = (item) => {
-  // item.isSettingsActive = !item.isSettingsActive
+  item.isSettingsActive = !item.isSettingsActive
   currentExerciseId.value = item.id
   clear()
-
-  // console.log(currentExerciseId.value);
 }
 
-// const getType = value => setType.value = value
+const getType = value => {
+  setType = value
+};
 
 const storeSet = (item) => {
+  if(!repeatsSetData.value) return
+
   let { lastId } = useGenerateId(store.currentExercise)
 
   store.currentExercise.forEach(exercise => {
@@ -78,7 +79,7 @@ const storeSet = (item) => {
           id: lastId++,
           weight: weightSetData.value,
           repeats: repeatsSetData.value,
-          // setType: setType.value
+          setType: setType
         }
       ]
     }
