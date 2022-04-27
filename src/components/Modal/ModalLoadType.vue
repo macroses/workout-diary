@@ -36,15 +36,17 @@ const loadTypes = [
 <style lang="scss" scoped>
 .load-type {
   display: flex;
-  margin-top: 4px;
+  margin-top: 8px;
   padding-left: 6px;
 
   li {
+    flex-grow: 1;
     font-size: 10px;
     margin-right: 8px;
     padding: 1px 4px 2px;
     border: 1px solid var(--c-border);
-    border-radius: 10px;
+    border-radius: 4px;
+    text-align: center;
     color: var(--c-text);
     cursor: pointer;
     

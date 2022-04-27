@@ -2,7 +2,7 @@
   <div class="empty-title"></div>
   <ul class="exercises-list">
     <li
-        v-for="(exercise) in currentList"
+        v-for="(exercise) in currentValue"
         :key="exercise.id"
         @click="selectExerciseId(exercise)"
         class="exercises-list__item"
@@ -14,8 +14,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import Icon from '@/components/UI/Icon'
+import {computed, ref, watch} from "vue";
 import {useStore} from "@/store";
 
 const store = useStore()
@@ -43,16 +42,20 @@ const selectExerciseId = (exercise) => {
   }
 }
 
-watch(() => props.groupId, (value) => {
-  if(value) {
-    currentList.value = props.exercisesList.filter(el => el.categoryId === value)
-  }
-}, { immediate:true })
+// watch(() => props.groupId, (value) => {
+//   if(value) {
+//     currentList.value = props.exercisesList.filter(el => el.categoryId === value)
+//   }
+// }, { immediate:true })
 
 watch(() => store.currentTaskColor, (value) => {
   if(value) {
     activeColorObj.value.backgroundColor = `rgb(${store.currentTaskColor})`
   }
+})
+
+const currentValue = computed(() => {
+  return props.exercisesList.filter(el => el.categoryId === props.groupId)
 })
 </script>
 
@@ -72,6 +75,7 @@ watch(() => store.currentTaskColor, (value) => {
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 100%;
+  height: 34px;
 
   &:hover {
     background-color: var(--c-block-hover);

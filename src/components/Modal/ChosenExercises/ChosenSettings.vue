@@ -29,7 +29,7 @@ watch(() => props.currentId, (value) => {
   transition: height 0.3s;
   position: relative;
   &.active {
-    height: 55px;
+    height: 65px;
   }
 
   svg {

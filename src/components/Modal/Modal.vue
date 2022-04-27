@@ -76,6 +76,8 @@ const workoutNameToStore = () => {
 
   close()
 }
+
+
 </script>
 
 <style lang="scss" scoped>

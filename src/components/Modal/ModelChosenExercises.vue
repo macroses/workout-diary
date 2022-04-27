@@ -17,12 +17,9 @@
         <ModalExerciseSettings
           v-model:weight="weightSetData"
           v-model:repeats="repeatsSetData"
+          @storeSet="storeSet(exercise)"
         />
-        <Icon
-          class="save"
-          iconName="floppy-disk"
-          @click="storeSet(exercise)"
-        />
+
       </ChosenSettings>
 
       <ChosenSets :sets="exercise.sets"/>

@@ -24,7 +24,7 @@ const props = defineProps({
 .sets {
   display: flex;
   gap: 12px;
-  padding: 6px 6px 0;
+  padding: 0 6px 0;
   .set-item {
     cursor: pointer;
     padding-bottom: 6px;
