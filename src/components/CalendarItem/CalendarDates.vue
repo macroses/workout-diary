@@ -6,7 +6,9 @@
       @click="toggleModal(day)">
     <span class="day-num">{{ day.format('D') }}</span>
 
-    <CalendarDayTasks :day="day"/>
+    <CalendarDayTasks 
+      @deleteWorkoutItem="deleteWorkoutItem"
+      :day="day"/>
   </li>
 </template>
 
@@ -20,6 +22,7 @@ const props = defineProps({
 
 const emit = defineEmits(['toggleModal'])
 const toggleModal = (value) => emit('toggleModal', value)
+const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
 </script>
 
 <style lang="scss" scoped>

@@ -11,8 +11,14 @@
 
 <script setup>
 import { useStore } from '@/store'
+import { ref } from 'vue-demi';
 
-const props = defineProps({day: Object})
+const props = defineProps({
+  day: Object
+})
+
+const emit = defineEmits(['deleteWorkoutItem'])
+const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
 
 const store = useStore()
 
@@ -22,14 +28,6 @@ const checkEqualDates = (date) => {
       return el.userValue
     }
   })
-}
-
-const deleteWorkoutItem = (id) => {
-  const name = store.userWorkout.find(el => el.id === id)
-
-  if(confirm(`Удалить тренировку ${name.userValue}`)) {
-    store.userWorkout = store.userWorkout.filter(el => el.id !== id);
-  }
 }
 </script>
 
