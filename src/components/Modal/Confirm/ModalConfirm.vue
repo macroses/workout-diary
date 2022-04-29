@@ -1,23 +1,30 @@
 <template>
   <teleport to="body">
-    <div 
-      v-if="isConfirm"
-      class="confirm-layer">
-      <div class="confirm">
-        <div class="content">
-          удалить {{title}} ?
-        </div>
-        <div class="btn-group">
-          <Button :accentColor="true" @click="dropBoolean(true)">Ок</Button>
-          <Button @click="dropBoolean(false)">Отмена</Button>
+    <Transition name="modal">
+      <div 
+        v-if="isConfirm"
+        class="confirm-layer">
+        <div class="confirm">
+          <div class="content">
+            {{title}}
+          </div>
+          <div class="btn-group">
+            <Button 
+              :accentColor="true" 
+              @click="dropBoolean(true)">
+              Ок
+            </Button>
+            <Button @click="dropBoolean(false)">Отмена</Button>
+          </div>
         </div>
       </div>
-    </div>
+    </Transition>
   </teleport>
 </template>
 
 <script setup>
 import Button from '../../UI/Button.vue';
+import TransitionFade from '../../UI/TransitionFade.vue';
 
 const props = defineProps({
   isConfirm: Boolean,
@@ -33,9 +40,9 @@ const dropBoolean = (val) => emit('dropBoolean', val)
 .confirm-layer {
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
 
   z-index: 999;
 
@@ -53,10 +60,13 @@ const dropBoolean = (val) => emit('dropBoolean', val)
   display: flex;
   flex-direction: column;
   padding: 16px;
+  transition: 0.3s;
 }
 
 .content {
   flex: 1 1 auto;
+  margin-bottom: 16px;
+  font-weight: 600;
 }
 
 .btn-group {
@@ -67,5 +77,19 @@ const dropBoolean = (val) => emit('dropBoolean', val)
   div {
     flex: 1;
   }
+}
+
+.modal-enter-from {
+  opacity: 0;
+}
+
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .confirm,
+.modal-leave-to .confirm {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 </style>
