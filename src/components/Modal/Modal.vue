@@ -70,6 +70,7 @@ const workoutNameToStore = () => {
     date: props.dayData.format('D.MM.Y'),
     exercises: store.currentExercise,
   })
+
   workoutName.value = ''
   store.currentExercise = []
   store.currentTaskColor = '11, 128, 67'
@@ -110,4 +111,5 @@ const workoutNameToStore = () => {
   background: white;
   border-radius: 8px;
 }
+
 </style>

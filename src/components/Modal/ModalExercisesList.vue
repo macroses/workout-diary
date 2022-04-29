@@ -6,16 +6,19 @@
         :key="exercise.id"
         @click="selectExerciseId(exercise)"
         class="exercises-list__item"
-        :style="[ exercise.isSelected ? activeColorObj: '' ]"
+        :style="[ exercise.isSelected ? activeColorObj : '' ]"
     >
       {{ exercise.name }}
+      <Icon :iconName="exercise.isSelected ? 'minus' : 'plus'"/>
     </li>
   </ul>
+
 </template>
 
 <script setup>
 import {computed, ref, watch} from "vue";
 import {useStore} from "@/store";
+import Icon from "../UI/Icon.vue";
 
 const store = useStore()
 
@@ -24,39 +27,32 @@ const props = defineProps({
   exercisesList: Array
 })
 
-const activeColorObj = ref({
-  backgroundColor: `rgb(${store.currentTaskColor})`,
-  color: 'var(--c-bg)',
+const computedColor = computed(() => `rgb(${store.currentTaskColor})`)
+const currentValue = computed(() => props.exercisesList.filter(el => el.categoryId === props.groupId))
+
+watch(() => store.currentExercise, (value) => {
+  if(!value.length) {
+    currentValue.value.forEach(element => {
+      element.isSelected = false
+    });
+  }
 })
 
-let currentList = ref([])
+const activeColorObj = ref({
+  backgroundColor: computedColor,
+  color: 'var(--c-bg)',
+})
 
 const selectExerciseId = (exercise) => {
   exercise.isSelected = !exercise.isSelected
 
   if(!store.currentExercise.includes(exercise)) {
-    store.currentExercise = [...store.currentExercise ,exercise]
+    store.currentExercise = [...store.currentExercise, exercise]
   }
   else {
     store.currentExercise = store.currentExercise.filter(el => el.id !== exercise.id)
   }
 }
-
-// watch(() => props.groupId, (value) => {
-//   if(value) {
-//     currentList.value = props.exercisesList.filter(el => el.categoryId === value)
-//   }
-// }, { immediate:true })
-
-watch(() => store.currentTaskColor, (value) => {
-  if(value) {
-    activeColorObj.value.backgroundColor = `rgb(${store.currentTaskColor})`
-  }
-})
-
-const currentValue = computed(() => {
-  return props.exercisesList.filter(el => el.categoryId === props.groupId)
-})
 </script>
 
 <style scoped lang="scss">
@@ -80,5 +76,11 @@ const currentValue = computed(() => {
   &:hover {
     background-color: var(--c-block-hover);
   }
+}
+
+svg {
+  margin-left: auto;
+  width: 16px;
+  fill: var(--c-text-light)
 }
 </style>

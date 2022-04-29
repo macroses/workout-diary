@@ -21,6 +21,7 @@ const props = defineProps({
 div {
   display: flex;
   align-items: center;
+  justify-content: center;
   background: var(--c-bg);
   border: 1px solid var(--c-border);
   border-radius: 4px;

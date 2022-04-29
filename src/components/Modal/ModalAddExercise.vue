@@ -9,7 +9,7 @@
         @click="selectGroupId(exerciseGroup.id, index)"
         class="exercisegroup-item"
         :class="{active: index === activeGroupNameItem}"
-        :style="[index === activeGroupNameItem ? `background-color: rgb(${store.currentTaskColor})`: ''] "
+        :style="[index === activeGroupNameItem  ? `background-color: rgb(${store.currentTaskColor})`: ''] "
       >
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
@@ -17,21 +17,6 @@
 
       <ExerciseAddGroup @isNewGroup="isNewGroup"/>
     </ul>
-
-    <div 
-      v-else
-      class="createCategoryForm">
-      <InputText 
-        @userInput="dropUsersGroupNameToStore"
-        :inputValue="usersInputValue"
-        pholder="Название группы" />
-      <div class="btn-group">
-        <Button @click="isNewGroup">Отменить</Button>
-        <Button
-            :accentColor="true"
-            @click="toExerciseGroup">Сохранить</Button>
-      </div>
-    </div>
 
     <ModalExercisesList
       :groupId="exercisesGroupId"
@@ -64,7 +49,7 @@ const store = useStore()
 
 onMounted(async() => {
   exerciseGroups.value = await Exercises.getExercisesGroup()
-  exercisesList.value = await  Exercises.getExercisesList()
+  exercisesList.value = await Exercises.getExercisesList()
 })
 
 const dropUsersGroupNameToStore = (value) => {
@@ -83,9 +68,9 @@ const toExerciseGroup = () => {
   isNewGroupVisible.value = false
 }
 
-const selectGroupId = (id, i) => {
+const selectGroupId = (id, index) => {
   exercisesGroupId.value = id
-  activeGroupNameItem.value = i
+  activeGroupNameItem.value = index
 }
 </script>
 

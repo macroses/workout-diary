@@ -22,7 +22,7 @@ const props = defineProps({
 
 const store = useStore()
 
-const resetExerciseStore = () => store.currentExercise = []
+const resetExerciseStore = () => store.clearExercise()
 </script>
 
 <style lang="scss" scoped>
