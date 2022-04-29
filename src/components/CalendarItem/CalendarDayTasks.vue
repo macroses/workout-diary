@@ -11,7 +11,6 @@
 
 <script setup>
 import { useStore } from '@/store'
-import { ref } from 'vue-demi';
 
 const props = defineProps({
   day: Object
