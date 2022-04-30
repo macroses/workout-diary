@@ -9,7 +9,7 @@
         @click="selectGroupId(exerciseGroup.id, index)"
         class="exercisegroup-item"
         :class="{active: index === activeGroupNameItem}"
-        :style="[index === activeGroupNameItem  ? `background-color: rgb(${store.currentTaskColor})`: ''] "
+        :style="[index === activeGroupNameItem  ? `border-right-color: rgb(${store.currentTaskColor})`: ''] "
       >
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
@@ -92,6 +92,7 @@ const selectGroupId = (id, index) => {
   padding: 8px 16px;
   cursor: pointer;
   font-size: 13px;
+  border-right: 6px solid transparent;
   &:hover {
     background-color: var(--c-block-hover);
   }
@@ -100,14 +101,6 @@ const selectGroupId = (id, index) => {
     margin-right: 16px;
     width: 18px;
     height: 18px;
-  }
-
-  &.active {
-    color: var(--c-bg);
-
-    svg {
-      fill: var(--c-bg);
-    }
   }
 }
 

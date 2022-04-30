@@ -1,5 +1,5 @@
 <template>
-  <svg viewBox="0 0 24 24">
+  <svg viewBox="0 0 24 24" :title="title">
     <use :xlink:href="`/light.svg#${iconName}`"></use>
   </svg>
 </template>
@@ -8,6 +8,7 @@
 
 const props = defineProps({
   iconName: { type: String, require: true },
+  title: String
 });
 
 </script>

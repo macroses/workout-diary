@@ -18,17 +18,10 @@
           :value="repeats"
       >
     </div>
-    <Icon
-        class="save"
-        iconName="floppy-disk"
-        @click="storeSet"
-        :style="{fill: fillIconValue}"
-    />
   </div>
 </template>
 
 <script setup>
-import Icon from "@/components/UI/Icon";
 import { useOnlyNumbers } from "@/composables/useOnlyNumbers"
 import {ref, watch} from "vue";
 
@@ -54,9 +47,7 @@ watch(() => props.repeats, (value) => {
 <style lang="scss" scoped>
 .settings-inputs {
   display: flex;
-  gap: 16px;
-  padding: 0 8px;
-  margin-top: 8px;
+  gap: 8px;
   div {
     flex-grow: 1;
   }
@@ -65,13 +56,10 @@ watch(() => props.repeats, (value) => {
 input {
   font-size: 12px;
   width: 100%;
-  border: 0;
   outline: 0;
-  border-bottom: 1px solid var(--c-border);
-}
-
-svg {
-  cursor: pointer;
-  fill: #a4adaf;
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+  padding: 0 6px;
+  height: 26px;
 }
 </style>

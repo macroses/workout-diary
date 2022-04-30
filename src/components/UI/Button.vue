@@ -1,5 +1,7 @@
 <template>
-  <div :class="{accentBtn: accentColor}">
+  <div
+    :class="{ accentBtn: accentColor, small: size === 'sm'}"
+  >
     <Icon
         v-if="iconName"
         :iconName="iconName" />
@@ -12,7 +14,8 @@ import Icon from '@/components/UI/Icon'
 
 const props = defineProps({
   iconName: String,
-  accentColor: Boolean
+  accentColor: Boolean,
+  size: String
 })
 
 </script>
@@ -34,6 +37,13 @@ div {
   &:hover {
     background: var(--c-block-hover);
   }
+}
+
+.small {
+  min-height: 26px;
+  max-height: 26px;
+  font-size: 13px;
+  font-weight: 200;
 }
 
 .accentBtn {

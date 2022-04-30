@@ -13,12 +13,20 @@
         :settings="exercise"
         :currentId="currentExerciseId"
       >
-        <ModalLoadType @dropType="getType"/>
         <ModalExerciseSettings
           v-model:weight="weightSetData"
           v-model:repeats="repeatsSetData"
           @storeSet="storeSet(exercise)"
         />
+        <ModalLoadType @dropType="getType"/>
+
+        <Button
+            @click="storeSet(exercise)"
+            size="sm"
+            :accentColor="!!repeatsSetData"
+        >
+          Сохранить
+        </Button>
 
       </ChosenSettings>
 
@@ -39,6 +47,7 @@ import { useStore } from "@/store"
 import { useGenerateId } from "@/composables/useGenerateId";
 import {ref, watch} from "vue";
 import ChosenListWrap from "@/components/Modal/ChosenExercises/ChosenListWrap";
+import Button from "@/components/UI/Button";
 
 const store = useStore()
 

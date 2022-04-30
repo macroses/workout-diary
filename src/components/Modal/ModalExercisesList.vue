@@ -39,8 +39,7 @@ watch(() => store.currentExercise, (value) => {
 })
 
 const activeColorObj = ref({
-  backgroundColor: computedColor,
-  color: 'var(--c-bg)',
+  borderRightColor: computedColor
 })
 
 const selectExerciseId = (exercise) => {
@@ -72,6 +71,7 @@ const selectExerciseId = (exercise) => {
   overflow: hidden;
   max-width: 100%;
   height: 34px;
+  border-right: 6px solid transparent;
 
   &:hover {
     background-color: var(--c-block-hover);
