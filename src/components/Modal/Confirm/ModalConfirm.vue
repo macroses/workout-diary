@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
     <Transition name="modal">
-      <div 
+      <div
         v-if="isConfirm"
         class="confirm-layer">
         <div class="confirm">
@@ -9,8 +9,8 @@
             {{title}}
           </div>
           <div class="btn-group">
-            <Button 
-              :accentColor="true" 
+            <Button
+              :accentColor="true"
               @click="dropBoolean(true)">
               Ок
             </Button>
@@ -31,8 +31,8 @@ const props = defineProps({
   title: String
 })
 
-const emit = defineEmits('dropBoolean');
-const dropBoolean = (val) => emit('dropBoolean', val)
+const emit = defineEmits(['dropBoolean']);
+const dropBoolean = val => emit('dropBoolean', val)
 
 </script>
 

@@ -13,15 +13,27 @@
         <div class="col" title="повторы">
           <Icon iconName="repeat"/>
           {{set.repeats}}
+          <span v-if="set.isSettingActive">lol</span>
         </div>
         <div class="col" title="тип нагрузки">
           <Icon iconName="chart-line-up"/>
           <div
               v-if="set.setType"
               class="setType-indicator"
-              :style="{backgroundColor: set.setType}"
+              :style="{backgroundColor: set.setType.color}"
           ></div>
           <span v-else>—</span>
+        </div>
+        <div class="col">
+          <div class="set-settings-icon">
+            <Icon
+              @click="editSet(set)"
+              iconName="marker"/>
+            <Icon
+              @click="deleteSetItem(set)"
+              iconName="xmark"/>
+          </div>
+
         </div>
       </div>
     </li>
@@ -32,8 +44,21 @@
 import Icon from "@/components/UI/Icon";
 
 const props = defineProps({
-  sets: Object
+  sets: Array
 })
+
+const emit = defineEmits(['deleteSetItem'])
+const deleteSetItem = (value) => emit('deleteSetItem', value)
+
+const editSet = (item) => {
+  for (let key in props.sets) {
+    let value = props.sets[key]
+    if(value.id === item.id) {
+      item.isSettingActive = !item.isSettingActive
+      console.log(item.isSettingActive)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +84,6 @@ const props = defineProps({
   flex: 1;
   display: flex;
   align-items: center;
-  padding-left: 40px;
   font-size: 13px;
   font-weight: 500;
   svg {
@@ -83,5 +107,14 @@ const props = defineProps({
   width: 10px;
   height: 10px;
   border-radius: 50%;
+}
+
+.set-settings-icon {
+  margin-left: auto;
+  svg {
+    &:hover {
+      fill: var(--c-text);
+    }
+  }
 }
 </style>

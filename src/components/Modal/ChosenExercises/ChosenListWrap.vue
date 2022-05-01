@@ -4,10 +4,6 @@
   </ul>
 </template>
 
-<script setup>
-
-</script>
-
 <style lang="scss" scoped>
 .chosen-list {
   width: 400px;

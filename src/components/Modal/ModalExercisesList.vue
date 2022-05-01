@@ -12,13 +12,12 @@
       <Icon :iconName="exercise.isSelected ? 'minus' : 'plus'"/>
     </li>
   </ul>
-
 </template>
 
 <script setup>
-import {computed, ref, watch} from "vue";
-import {useStore} from "@/store";
-import Icon from "../UI/Icon.vue";
+import {computed, ref, watch} from "vue"
+import {useStore} from "@/store"
+import Icon from "@/components/UI/Icon.vue"
 
 const store = useStore()
 
@@ -42,16 +41,7 @@ const activeColorObj = ref({
   borderRightColor: computedColor
 })
 
-const selectExerciseId = (exercise) => {
-  exercise.isSelected = !exercise.isSelected
-
-  if(!store.currentExercise.includes(exercise)) {
-    store.currentExercise = [...store.currentExercise, exercise]
-  }
-  else {
-    store.currentExercise = store.currentExercise.filter(el => el.id !== exercise.id)
-  }
-}
+const selectExerciseId = exercise => store.selectExerciseId(exercise)
 </script>
 
 <style scoped lang="scss">

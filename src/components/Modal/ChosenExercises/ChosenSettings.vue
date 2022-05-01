@@ -37,12 +37,5 @@ watch(() => props.currentId, (value) => {
     height: 38px;
     overflow: visible;
   }
-
-  //svg {
-  //  position: absolute;
-  //  right: 16px;
-  //  top: 16px;
-  //  cursor: pointer;
-  //}
 }
 </style>

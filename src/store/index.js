@@ -12,14 +12,41 @@ export const useStore = defineStore('main', {
     clearExercise() {
       this.currentExercise = []
     },
-    userWorkoutPush(id, userValue, color, date, exercise) {
-      this.userWorkout.push({
-        id: id + 1,
-        userValue,
-        color,
-        date,
-        exercises: exercise,
+
+    deleteSetItem(value) {
+      this.currentExercise.forEach(exercise => {
+        exercise.sets = exercise.sets.filter(set => set.id !== value.id)
       })
+    },
+
+    selectExerciseId(exercise) {
+      exercise.isSelected = !exercise.isSelected
+
+      if(!this.currentExercise.includes(exercise)) {
+        this.currentExercise = [...this.currentExercise, exercise]
+      }
+      else {
+        this.currentExercise = this.currentExercise.filter(el => el.id !== exercise.id)
+      }
+    },
+
+    storeSet(item, lastId, weight, repeats, sets) {
+      if(!repeats) return
+
+      this.currentExercise.forEach(exercise => {
+        if(exercise.id === item.id) {
+          exercise.sets = [
+            ...exercise.sets,
+            {
+              id: lastId++,
+              weight: weight,
+              repeats: repeats,
+              setType: sets
+            }
+          ]
+        }
+      })
+      item.isSettingsActive = false
     }
   }
 })

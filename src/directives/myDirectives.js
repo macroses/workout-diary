@@ -1,1 +1,1 @@
-export const vFocusOnLoad = (el) => el.focus()
+export const vFocusOnLoad = el => el.focus()

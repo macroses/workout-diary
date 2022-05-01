@@ -35,13 +35,11 @@ import { ref } from 'vue';
 
 const days = useDate()
 const store = useStore()
-let isModalOpen = ref(false)
-let isNewGroupActive = ref(false)
+const isModalOpen = ref(false)
+const isNewGroupActive = ref(false)
 const isConfirm = ref(false)
 const confirmId = ref(0)
 const eventName = ref('')
-
-const answerFromConfirm = ref(null)
 
 const toggleModal = (day) => {
   isModalOpen.value = !isModalOpen.value

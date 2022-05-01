@@ -17,7 +17,10 @@
       <li
           v-for="(type, index) in loadTypes"
           :key="type.id"
-          @click="dropType(type.color); toggleACtiveClass(index, type)"
+          @click="
+            dropType(type);
+            toggleActiveClass(index, type)
+          "
           class="type-item"
           :class="{active: index === activeItem}"
           :title="type.name"
@@ -40,15 +43,15 @@ import Icon from "@/components/UI/Icon";
 const activeItem = ref(null)
 const resultName = ref('Тип нагрузки')
 const resultColor = ref('transparent')
-const isLoadType = ref(false)
 const list = ref(null)
+let isLoadType = ref(false)
 
 const emit = defineEmits(['dropType'])
 const dropType = (value) => {
   emit('dropType', value)
 }
 
-const toggleACtiveClass = (index, item) => {
+const toggleActiveClass = (index, item) => {
   activeItem.value = index
   resultName.value = item.name
   resultColor.value = item.color
