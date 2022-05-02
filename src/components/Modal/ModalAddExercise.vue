@@ -30,15 +30,11 @@
 import Icon from '@/components/UI/Icon'
 import Exercises from '@/api/api'
 import { onMounted, ref } from 'vue'
-import Button from '@/components/UI/Button.vue';
-import InputText from '@/components/UI/InputText.vue';
 import { useStore } from '@/store';
 import ModalExercisesList from "@/components/Modal/ModalExercisesList";
 import ModelChosenExercises from "@/components/Modal/ModelChosenExercises";
 import ExerciseAddGroup from "@/components/Modal/ExerciseCategory/ExerciseAddGroup";
-import ExerciseGroupItem from "@/components/Modal/ExerciseCategory/ExerciseGroupItem";
 
-let usersInputValue = ref('')
 let isNewGroupVisible = ref(false)
 let exerciseGroups = ref([])
 let exercisesList = ref([])

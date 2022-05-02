@@ -47,6 +47,26 @@ export const useStore = defineStore('main', {
         }
       })
       item.isSettingsActive = false
+    },
+
+    workoutNameToStore(workoutName, date) {
+      if(!workoutName) return
+      let lastId = 0
+
+      if(this.userWorkout.length) {
+        lastId = this.userWorkout[this.userWorkout.length - 1].id
+      }
+
+      this.userWorkout.push({
+        id: lastId + 1,
+        userValue: workoutName,
+        color: this.currentTaskColor,
+        date: date,
+        exercises: this.currentExercise,
+      })
+
+      this.currentExercise = []
+      this.currentTaskColor = '11, 128, 67'
     }
   }
 })

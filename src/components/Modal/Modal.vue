@@ -47,7 +47,7 @@ const props = defineProps({
 
 const workoutName = ref('')
 const isWorkoutName = ref(true)
-let currentColor = ref('')
+const currentColor = ref('')
 
 const store = useStore()
 const emits = defineEmits(['close'])
@@ -55,30 +55,10 @@ const close = () => emits('close')
 const getTaskColor = (data) => currentColor.value = data
 
 const workoutNameToStore = () => {
-  if(!workoutName.value) return
-
-  let lastId = 0
-
-  if(store.userWorkout.length) {
-    lastId = store.userWorkout[store.userWorkout.length - 1].id
-  }
-
-  store.userWorkout.push({
-    id: lastId + 1,
-    userValue: workoutName.value,
-    color: store.currentTaskColor,
-    date: props.dayData.format('D.MM.Y'),
-    exercises: store.currentExercise,
-  })
-
+  store.workoutNameToStore(workoutName.value, props.dayData.format('D.MM.Y'))
   workoutName.value = ''
-  store.currentExercise = []
-  store.currentTaskColor = '11, 128, 67'
-
   close()
 }
-
-
 </script>
 
 <style lang="scss" scoped>

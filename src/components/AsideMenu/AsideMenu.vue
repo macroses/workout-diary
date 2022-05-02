@@ -20,13 +20,9 @@
 import Checkbox from "@/components/UI/Checkbox";
 import Icon from "@/components/UI/Icon";
 
-
 const props = defineProps({
   isMenuOpen: {type: Boolean}
 })
-
-
-
 </script>
 
 <style lang="scss" scoped>

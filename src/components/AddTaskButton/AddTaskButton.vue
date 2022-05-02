@@ -8,10 +8,11 @@
       <span v-if="isMenuOpen">Создать</span>
     </div>
     <ul
+        ref="taskOptionsList"
         v-if="isOptionsListOpen"
         class="add_task_options">
       <li>{{ addWorkoutTitle }}</li>
-      <li @click="toggleModal">
+      <li>
         {{ addExerciseTitle }}
       </li>
     </ul>
@@ -21,13 +22,13 @@
 <script setup>
 import Icon from "@/components/UI/Icon"
 import {ref} from "vue"
+import {useOnClickOutside} from "@/composables/useClickOutside";
 
 const props = defineProps({
   isMenuOpen: { type: Boolean }
 })
 
-let isModalOpen = ref(false)
-const toggleModal = () => isModalOpen.value = !isModalOpen.value
+const taskOptionsList = ref(null)
 
 const addExerciseTitle = "Добавить упражнение"
 const addWorkoutTitle = "Добавить тренировку"
@@ -35,10 +36,7 @@ const addWorkoutTitle = "Добавить тренировку"
 let isOptionsListOpen = ref(false)
 
 const toggleOptionsList = () => isOptionsListOpen.value = !isOptionsListOpen.value
-const hideOptionList = () => isOptionsListOpen.value = false
-
-document.addEventListener('click', hideOptionList, true)
-document.removeEventListener('click', hideOptionList)
+useOnClickOutside(taskOptionsList, () => isOptionsListOpen.value = false)
 </script>
 
 <style lang="scss" scoped>

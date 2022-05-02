@@ -21,7 +21,6 @@ const props = defineProps({
 })
 
 const store = useStore()
-
 const resetExerciseStore = () => store.clearExercise()
 </script>
 
