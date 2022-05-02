@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 
+let lastId = 0
+
 export const useStore = defineStore('main', {
   state: () => ({
     currentDayForCreateWorkout: {},
@@ -9,8 +11,9 @@ export const useStore = defineStore('main', {
     currentTaskColor: '' || '11, 128, 67'
   }),
   actions: {
-    clearExercise() {
+    clearExercise(array) {
       this.currentExercise = []
+      if(array) array = []
     },
 
     deleteSetItem(value) {
@@ -30,7 +33,8 @@ export const useStore = defineStore('main', {
       }
     },
 
-    storeSet(item, lastId, weight, repeats, sets) {
+    storeSet(item, weight, repeats, sets) {
+
       if(!repeats) return
 
       this.currentExercise.forEach(exercise => {

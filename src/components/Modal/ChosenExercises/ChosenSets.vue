@@ -8,12 +8,23 @@
       <div class="set-item__row">
         <div class="col" title="вес">
           <Icon iconName="weight-scale"/>
-          {{set.weight}}
+          <div v-if="!set.isSettingActive">{{set.weight}}</div>
+          <input
+            v-else
+            type="text"
+            @focus="$event.target.select()"
+            @keydown="useOnlyNumbers"
+            v-model="set.weight">
         </div>
         <div class="col" title="повторы">
           <Icon iconName="repeat"/>
-          {{set.repeats}}
-          <span v-if="set.isSettingActive">lol</span>
+          <div v-if="!set.isSettingActive">{{set.repeats}}</div>
+          <input
+              v-else
+              type="text"
+              @focus="$event.target.select()"
+              @keydown="useOnlyNumbers"
+              v-model="set.repeats">
         </div>
         <div class="col" title="тип нагрузки">
           <Icon iconName="chart-line-up"/>
@@ -26,14 +37,20 @@
         </div>
         <div class="col">
           <div class="set-settings-icon">
-            <Icon
-              @click="editSet(set)"
-              iconName="marker"/>
-            <Icon
-              @click="deleteSetItem(set)"
-              iconName="xmark"/>
+            <div
+                @click="editSet(set)"
+                class="set-settings-icon__item">
+              <Icon
+                  :iconName="!set.isSettingActive ? 'marker' : 'check'"
+                  :style="[set.isSettingActive ? 'fill: green': '']"
+              />
+            </div>
+            <div
+                @click="deleteSetItem(set)"
+                class="set-settings-icon__item">
+              <Icon iconName="xmark"/>
+            </div>
           </div>
-
         </div>
       </div>
     </li>
@@ -41,24 +58,18 @@
 </template>
 
 <script setup>
+import { vFocusOnLoad } from "@/directives/myDirectives"
+import { useStore } from '@/store'
+import { useOnlyNumbers } from "@/composables/useOnlyNumbers"
 import Icon from "@/components/UI/Icon";
 
 const props = defineProps({
   sets: Array
 })
 
-const emit = defineEmits(['deleteSetItem'])
-const deleteSetItem = (value) => emit('deleteSetItem', value)
-
-const editSet = (item) => {
-  for (let key in props.sets) {
-    let value = props.sets[key]
-    if(value.id === item.id) {
-      item.isSettingActive = !item.isSettingActive
-      console.log(item.isSettingActive)
-    }
-  }
-}
+const store = useStore()
+const deleteSetItem = item => store.deleteSetItem(item)
+const editSet = (item) => item.isSettingActive = !item.isSettingActive
 </script>
 
 <style lang="scss" scoped>
@@ -67,9 +78,9 @@ const editSet = (item) => {
 }
 
 .set-item {
-  cursor: pointer;
-  padding: 6px;
+  padding: 0 6px 0 16px;
   display: flex;
+  min-height: 30px;
   &:not(:last-child) {
     border-bottom: 1px solid var(--c-border);
   }
@@ -92,6 +103,15 @@ const editSet = (item) => {
     fill: var(--c-text-light);
     margin-right: 8px;
   }
+
+  input {
+    width: 40px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid var(--c-border);
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+  }
 }
 
 .weight-item, .repeats-item {
@@ -111,9 +131,25 @@ const editSet = (item) => {
 
 .set-settings-icon {
   margin-left: auto;
+  display: flex;
+  height: 100%;
   svg {
+    margin: 0
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 100%;
+    width: 30px;
+    border-radius: 50%;
     &:hover {
-      fill: var(--c-text);
+      background: var(--c-block-hover);
+      svg {
+        fill: var(--c-text);
+      }
     }
   }
 }

@@ -28,7 +28,7 @@ const openSetSettings = () => emit('openSetSettings')
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 6px;
+  padding: 0 8px 0 16px;
 
   svg {
     width: 14px;

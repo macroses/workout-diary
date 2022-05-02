@@ -27,10 +27,7 @@
           Сохранить
         </Button>
       </ChosenSettings>
-      <ChosenSets
-        @deleteSetItem="deleteSetItem"
-        :sets="exercise.sets"
-      />
+      <ChosenSets :sets="exercise.sets"/>
     </ChosenItem>
   </ChosenListWrap>
 </template>
@@ -55,8 +52,6 @@ const currentExerciseId = ref(0)
 
 let setType = null
 
-let lastId = 0
-
 const clear = () => {
   weightSetData.value = ''
   repeatsSetData.value = ''
@@ -71,11 +66,9 @@ const openSetSettings = (item) => {
 const getType = value => setType = value
 
 const storeSet = item => {
-  store.storeSet( item, lastId, weightSetData.value, repeatsSetData.value, setType)
+  store.storeSet( item, weightSetData.value, repeatsSetData.value, setType)
   clear()
 }
-
-const deleteSetItem = item => store.deleteSetItem(item)
 </script>
 
 <style lang="scss" scoped>

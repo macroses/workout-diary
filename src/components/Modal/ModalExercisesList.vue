@@ -33,7 +33,8 @@ watch(() => store.currentExercise, (value) => {
   if(!value.length) {
     currentValue.value.forEach(element => {
       element.isSelected = false
-    });
+      element.sets = []
+    })
   }
 })
 

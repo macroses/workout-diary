@@ -13,10 +13,14 @@
           class="check-icon"/>
     </div>
 
-    <Icon
-        class="closeIcon"
-        iconName="xmark"
-        @click="close"/>
+    <div
+        @click="close"
+        class="icon-wrap">
+      <Icon
+          class="closeIcon"
+          iconName="xmark"
+          />
+    </div>
   </div>
 </template>
 
@@ -67,6 +71,23 @@ const close = () => emit('close')
 
 .closeIcon {
   cursor: pointer;
+  width: 18px;
+  height: 18px;
   fill: var(--c-bg);
+}
+
+.icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: background-color 0.3s;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255,255,255, 0.2)
+  }
 }
 </style>

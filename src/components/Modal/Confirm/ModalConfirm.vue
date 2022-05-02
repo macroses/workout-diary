@@ -25,6 +25,7 @@
 <script setup>
 import Button from '../../UI/Button.vue';
 import TransitionFade from '../../UI/TransitionFade.vue';
+import {computed, ref} from "vue";
 
 const props = defineProps({
   isConfirm: Boolean,
@@ -67,6 +68,11 @@ const dropBoolean = val => emit('dropBoolean', val)
   flex: 1 1 auto;
   margin-bottom: 16px;
   font-weight: 600;
+
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .btn-group {
