@@ -1,6 +1,5 @@
 <template>
   <li
-      @click="isNewGroup"
       class="exercisegroup-item">
     <Icon iconName="plus"/>
     Добавить свою группу
@@ -9,9 +8,6 @@
 
 <script setup>
 import Icon from "@/components/UI/Icon";
-
-const emit = defineEmits(['isNewGroup'])
-const isNewGroup = () => emit('isNewGroup')
 </script>
 
 <style lang="scss" scoped>

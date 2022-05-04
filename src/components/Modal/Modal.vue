@@ -85,11 +85,21 @@ const workoutNameToStore = () => {
   position: absolute;
   left: 50%; 
   top: 50%;
+  min-height: 510px;
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);
   background: white;
   border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 </style>

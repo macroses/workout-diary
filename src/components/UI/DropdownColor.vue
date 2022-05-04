@@ -13,8 +13,8 @@
         v-for="colorItem in colorCollection"
         :key="colorItem.id"
         :style="{ backgroundColor: 'rgb(' + colorItem.rgb + ')' }"
-        @click="dropColor(colorItem.rgb)"
         :class="{ active: colorItem.rgb === defaultColor }"
+        @click="dropColor(colorItem.rgb)"
       >
       </li>
     </ul>

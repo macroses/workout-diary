@@ -31,6 +31,7 @@ const resetExerciseStore = () => store.clearExercise()
   color: var(--c-text-light);
   display: flex;
   span {
+    margin-left: 8px;
     color: var(--c-accent);
     font-weight: 600;
   }
@@ -43,13 +44,15 @@ const resetExerciseStore = () => store.clearExercise()
       border-radius: 4px;
     }
   }
+
+  .clear-all {
+    display: block;
+    margin-left: auto;
+    font-weight: 600;
+    color: var(--c-accent);
+    cursor: pointer;
+  }
 }
 
-.clear-all {
-  display: block;
-  margin-left: auto;
-  font-weight: 600;
-  color: var(--c-accent);
-  cursor: pointer;
-}
+
 </style>

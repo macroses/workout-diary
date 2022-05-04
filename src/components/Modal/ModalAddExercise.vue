@@ -9,14 +9,21 @@
         @click="selectGroupId(exerciseGroup.id, index)"
         class="exercisegroup-item"
         :class="{active: index === activeGroupNameItem}"
-        :style="[index === activeGroupNameItem  ? `border-right-color: rgb(${store.currentTaskColor})`: ''] "
+        :style="[index === activeGroupNameItem ? `border-right-color: rgb(${store.currentTaskColor})`: ''] "
       >
         <Icon :iconName="exerciseGroup.iconName"/>
         {{exerciseGroup.groupName}}
       </li>
 
-      <ExerciseAddGroup @isNewGroup="isNewGroup"/>
+      <ExerciseAddGroup @click="createNewGroup"/>
     </ul>
+
+    <ExerciseAddForm
+      :isNewGroupVisible="isNewGroupVisible"
+      v-model:groupName="newGroupName"
+      @toggleCreateForm="isNewGroupVisible = false"
+      @saveName="toExerciseGroup"
+    />
 
     <ModalExercisesList
       :groupId="exercisesGroupId"
@@ -29,17 +36,19 @@
 <script setup>
 import Icon from '@/components/UI/Icon'
 import Exercises from '@/api/api'
-import { onMounted, ref } from 'vue'
-import { useStore } from '@/store';
-import ModalExercisesList from "@/components/Modal/ModalExercisesList";
-import ModelChosenExercises from "@/components/Modal/ModelChosenExercises";
-import ExerciseAddGroup from "@/components/Modal/ExerciseCategory/ExerciseAddGroup";
+import {onMounted, ref} from 'vue'
+import { useStore } from '@/store'
+import ModalExercisesList from "@/components/Modal/ModalExercisesList"
+import ModelChosenExercises from "@/components/Modal/ModelChosenExercises"
+import ExerciseAddGroup from "@/components/Modal/ExerciseCategory/ExerciseAddGroup"
+import ExerciseAddForm from "@/components/Modal/ExerciseCategory/ExerciseAddForm"
 
 let isNewGroupVisible = ref(false)
 let exerciseGroups = ref([])
 let exercisesList = ref([])
 let exercisesGroupId = ref(0)
 let activeGroupNameItem = ref(null)
+let newGroupName = ref('')
 
 const store = useStore()
 
@@ -48,25 +57,28 @@ onMounted(async() => {
   exercisesList.value = await Exercises.getExercisesList()
 })
 
-const dropUsersGroupNameToStore = (value) => {
-  store.usersGroupName = value
+const selectGroupId = (id, index) => {
+  exercisesGroupId.value = id
+  activeGroupNameItem.value = index
 }
 
 const toExerciseGroup = () => {
+  if(!newGroupName.value) return
+
   exerciseGroups.value = [
     ...exerciseGroups.value,
     {
       id: exerciseGroups.value[exerciseGroups.value.length - 1].id + 1,
-      groupName: store.usersGroupName,
+      groupName: newGroupName.value,
       iconName: ''
     }
   ]
   isNewGroupVisible.value = false
 }
 
-const selectGroupId = (id, index) => {
-  exercisesGroupId.value = id
-  activeGroupNameItem.value = index
+const createNewGroup = () => {
+  isNewGroupVisible.value = true
+  newGroupName.value = ''
 }
 </script>
 
@@ -75,6 +87,7 @@ const selectGroupId = (id, index) => {
   display: flex;
   margin-top: 16px;
   border-top: 1px solid var(--c-border);
+  flex: 1 1 auto;
 }
 
 .close {
@@ -111,9 +124,5 @@ const selectGroupId = (id, index) => {
   }
 }
 
-.btn-group {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
+
 </style>

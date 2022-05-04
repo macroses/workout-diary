@@ -16,7 +16,6 @@
           v-model:weight="weightSetData"
           v-model:repeats="repeatsSetData"
           @storeSet="storeSet(exercise)"
-
         />
         <ModalLoadType @dropType="getType"/>
         <Button
@@ -40,7 +39,7 @@ import ChosenItemName from "@/components/Modal/ChosenExercises/ChosenItemName";
 import ChosenSettings from "@/components/Modal/ChosenExercises/ChosenSettings";
 import ChosenSets from "@/components/Modal/ChosenExercises/ChosenSets";
 import { useStore } from "@/store"
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import ChosenListWrap from "@/components/Modal/ChosenExercises/ChosenListWrap";
 import Button from "@/components/UI/Button";
 
