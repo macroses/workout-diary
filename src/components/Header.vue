@@ -3,26 +3,28 @@
     <AddTaskButton :isMenuOpen="isMenuOpen"/>
     <Burger @click="hideMenu"/>
     <Logo/>
-    <Button>Сегодня</Button>
+    <Button @click="resetDate">Сегодня</Button>
     <CurrentDate />
   </header>
 </template>
 
 <script setup>
 import Burger from '@/components/Burger/Burger.vue'
-import Logo from "@/components/HeaderLogo/Logo";
-import Button from "@/components/UI/Button";
-import CurrentDate from "@/components/HeaderCurrentDate/CurrentDate";
-import AddTaskButton from "@/components/AddTaskButton/AddTaskButton";
+import Logo from "@/components/HeaderLogo/Logo"
+import Button from "@/components/UI/Button"
+import CurrentDate from "@/components/HeaderCurrentDate/CurrentDate"
+import AddTaskButton from "@/components/AddTaskButton/AddTaskButton"
+import { useStore } from '@/store'
+
+const store = useStore()
 
 const props = defineProps({
   isMenuOpen: {type: Boolean}
 })
-const emit = defineEmits(['toggleMenu'])
 
-const hideMenu = () => {
-  emit('toggleMenu')
-}
+const emit = defineEmits(['toggleMenu'])
+const hideMenu = () => emit('toggleMenu')
+const resetDate = () => store.resetCurrentDate()
 </script>
 
 <style scoped lang="scss">

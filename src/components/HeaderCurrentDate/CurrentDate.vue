@@ -1,14 +1,26 @@
 <template>
   <div >
-    {{ initialMonth }}
-    {{ initialYear }}
+    <button @click="prevMonth">prev</button>
+    <button @click="nextMonth">next</button>
+    {{ month }}
+    {{ year }}
   </div>
 </template>
 
 <script setup>
-import { initialDates } from "@/helpers/initialDates";
+import { useStore } from '@/store'
+import {computed} from "vue";
+import moment from "moment";
 
-const {initialMonth, initialYear} = initialDates()
+
+
+const store = useStore();
+
+const nextMonth = () => store.initialDate = moment(store.initialDate).add(1, 'month')
+const prevMonth = () => store.initialDate = moment(store.initialDate).subtract(1, 'month')
+
+const month = computed(() => store.initialDate.format('MMMM'))
+const year = computed(() => store.initialDate.format('YYYY'))
 
 </script>
 

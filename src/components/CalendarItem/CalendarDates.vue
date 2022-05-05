@@ -1,9 +1,10 @@
 <template>
   <li
-      v-for="( day, index ) in days"
-      :key="index"
-      :class="{ today: useDateEquality(day) }"
-      @click="toggleModal(day)">
+    v-for="( day, index ) in store.getDaysArr()"
+    :key="index"
+    :class="{ today: useDateEquality(day) }"
+    @click="toggleModal(day)"
+  >
     <span class="day-num">{{ day.format('D') }}</span>
 
     <CalendarDayTasks 
@@ -15,6 +16,9 @@
 <script setup>
 import {useDateEquality} from "@/composables/useDate";
 import CalendarDayTasks from "@/components/CalendarItem/CalendarDayTasks";
+import { useStore } from "@/store";
+
+const store = useStore()
 
 const props = defineProps({
   days: Array

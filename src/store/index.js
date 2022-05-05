@@ -1,9 +1,12 @@
 import { defineStore } from "pinia"
+import moment from "moment";
 
+moment.locale('ru')
 let lastId = 0
 
 export const useStore = defineStore('main', {
   state: () => ({
+    initialDate: moment(),
     currentDayForCreateWorkout: {},
     usersGroupName: '',
     userWorkout: [],
@@ -71,6 +74,23 @@ export const useStore = defineStore('main', {
 
       this.currentExercise = []
       this.currentTaskColor = '11, 128, 67'
+    },
+
+    resetCurrentDate() {
+      this.initialDate = moment()
+    },
+
+    getDaysArr() {
+      const dayContext = this.initialDate
+      const monthDate = dayContext.startOf('month')
+      return [...Array(monthDate.daysInMonth())].map((_, i) => monthDate.clone().add(i, 'day'))
+    },
+
+    getEmptyDays() {
+      const dayContext = this.initialDate
+      const currentDate = dayContext.get('date')
+
+      return moment(dayContext).subtract((currentDate), 'days').weekday() + 1
     }
   }
 })
