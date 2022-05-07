@@ -3,7 +3,7 @@
     <AddTaskButton :isMenuOpen="isMenuOpen"/>
     <Burger @click="hideMenu"/>
     <Logo/>
-    <Button @click="resetDate">Сегодня</Button>
+    <Button @click="resetDate" :title="now.format('dddd, Do MMM')">Сегодня</Button>
     <CurrentDate />
   </header>
 </template>
@@ -14,6 +14,7 @@ import Logo from "@/components/HeaderLogo/Logo"
 import Button from "@/components/UI/Button"
 import CurrentDate from "@/components/HeaderCurrentDate/CurrentDate"
 import AddTaskButton from "@/components/AddTaskButton/AddTaskButton"
+import moment from 'moment'
 import { useStore } from '@/store'
 
 const store = useStore()
@@ -21,6 +22,8 @@ const store = useStore()
 const props = defineProps({
   isMenuOpen: {type: Boolean}
 })
+
+const now = moment()
 
 const emit = defineEmits(['toggleMenu'])
 const hideMenu = () => emit('toggleMenu')

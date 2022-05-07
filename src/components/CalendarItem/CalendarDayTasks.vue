@@ -5,6 +5,7 @@
     :key="item.id"
     :style="{backgroundColor: 'rgba(' + item.color + ', 0.5)'}"
     :title="item.userValue"
+    @click.stop="openTaskModal()"
   >
     <div class="task-name">{{ item.userValue }}</div>
     <div
@@ -12,20 +13,28 @@
         class="icon-wrap"
         title="удалить тренировку">
       <Icon
-
           class="delete-task"
           iconName="xmark"/>
     </div>
   </div>
+  <ModalTask
+    :isOpenTaskModal="isOpenTaskModal"
+    @close="isOpenTaskModal = false"
+    :taskId="item.id"
+  />
 </template>
 
 <script setup>
 import { useStore } from '@/store'
 import Icon from "@/components/UI/Icon"
+import {ref} from "vue";
+import ModalTask from "@/components/ModalTask/ModalTask";
 
 const props = defineProps({
   day: Object
 })
+
+const isOpenTaskModal = ref(false)
 
 const emit = defineEmits(['deleteWorkoutItem'])
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
@@ -38,6 +47,10 @@ const checkEqualDates = (date) => {
       return el.userValue
     }
   })
+}
+
+const openTaskModal = () => {
+  isOpenTaskModal.value = true
 }
 </script>
 

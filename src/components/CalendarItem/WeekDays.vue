@@ -16,6 +16,7 @@ const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс",]
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 20px;
   text-align: center;
+  grid-area: weekdays;
   li {
     border-right: 1px solid var(--c-border);
     text-transform: uppercase;

@@ -1,8 +1,7 @@
 <template>
   <div class="calendar-layout">
     <WeekDays/>
-    <ul class="days">
-      <CalendarEmptyDays/>
+    <ul ref="countCells" class="days">
       <CalendarDates 
         :days="days" 
         @toggleModal="toggleModal"
@@ -26,7 +25,6 @@
 <script setup>
 import Modal from '@/components/Modal/Modal'
 import ModalConfirm from '@/components/Modal/Confirm/ModalConfirm'
-import CalendarEmptyDays from "@/components/CalendarItem/CalendarEmptyDays";
 import CalendarDates from "@/components/CalendarItem/CalendarDates";
 import WeekDays from "@/components/CalendarItem/WeekDays";
 import { useStore } from '../store/index';
@@ -74,5 +72,14 @@ const deleteWorkoutItem = (id) => {
   height: 100%;
   gap: 1px;
   grid-template-columns: repeat(7, 1fr);
+  li {
+    height: calc((100vh / 5) - 18px);
+  }
+}
+
+.empty {
+  border-right: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
 }
 </style>

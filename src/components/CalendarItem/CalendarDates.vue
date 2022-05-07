@@ -1,12 +1,20 @@
 <template>
   <li
+    v-for="(_, index) in store.getEmptyDays()"
+    :key="index"
+    class="empty"
+    :style="[countCells > 35 ? moreHeight : styleHeightCalc]"
+  ></li>
+  <li
     v-for="( day, index ) in store.getDaysArr()"
     :key="index"
     :class="{ today: useDateEquality(day) }"
     @click="toggleModal(day)"
+    :style="[countCells > 35 ? moreHeight : styleHeightCalc]"
   >
-    <span class="day-num">{{ day.format('D') }}</span>
-
+    <transition name="slide" mode="out-in">
+      <span :key="day" class="day-num">{{ day.format('D') }}</span>
+    </transition>
     <CalendarDayTasks 
       @deleteWorkoutItem="deleteWorkoutItem"
       :day="day"/>
@@ -17,12 +25,25 @@
 import {useDateEquality} from "@/composables/useDate";
 import CalendarDayTasks from "@/components/CalendarItem/CalendarDayTasks";
 import { useStore } from "@/store";
+import {computed} from "vue";
 
 const store = useStore()
 
 const props = defineProps({
-  days: Array
+  days: Array,
 })
+
+const countCells = computed(() => {
+  return store.getEmptyDays() + props.days.length
+})
+
+const styleHeightCalc = {
+  height: 'calc((100vh / 5) - 19px'
+}
+
+const moreHeight = {
+  height: 'calc((100vh / 6) - 15px'
+}
 
 const emit = defineEmits(['toggleModal'])
 const toggleModal = (value) => emit('toggleModal', value)
@@ -39,7 +60,6 @@ li {
   gap: 1px;
   display: grid;
   grid-auto-rows: min-content;
-  height: calc((100vh / 5) - 18px);
 
   &:nth-child(7n) {
     border-right: none;
@@ -65,4 +85,18 @@ li {
   }
 }
 
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
 </style>

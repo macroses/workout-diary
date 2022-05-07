@@ -8,10 +8,12 @@
         <Icon iconName="angle-right"/>
       </div>
     </div>
-    <div class="current-month">
-      {{ month }}
-      {{ year }}
-    </div>
+    <transition name="slide" mode="out-in">
+      <div :key="month" class="current-month">
+        {{ month }}
+        {{ year }}
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -66,5 +68,21 @@ const year = computed(() => store.initialDate.format('YYYY'))
   font-weight: 500;
   margin-left: 12px;
   color: var(--c-text-dark);
+}
+
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.1s ease-out;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
 }
 </style>

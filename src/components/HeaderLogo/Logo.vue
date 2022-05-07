@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/" >
+  <router-link to="/" class="logo-link">
     <div class="logo">
       <Icon iconName="dumbbell"/>
       Дневник тренировок

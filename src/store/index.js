@@ -90,7 +90,11 @@ export const useStore = defineStore('main', {
       const dayContext = this.initialDate
       const currentDate = dayContext.get('date')
 
-      return moment(dayContext).subtract((currentDate), 'days').weekday() + 1
+      let emptyDaysCount = moment(dayContext).subtract((currentDate), 'days').weekday() + 1
+
+      if(emptyDaysCount === 7) emptyDaysCount = 0
+
+      return emptyDaysCount
     }
   }
 })

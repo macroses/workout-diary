@@ -1,4 +1,4 @@
-<template>
+<template v-if="store.getEmptyDays() !== 7">
   <li v-for="(_, index) in store.getEmptyDays()" :key="index"></li>
 </template>
 
