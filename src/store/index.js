@@ -19,6 +19,10 @@ export const useStore = defineStore('main', {
       if(array) array = []
     },
 
+    readExerciseById(id) {
+      return this.userWorkout.filter(el => el.id === id)[0]
+    },
+
     deleteSetItem(value) {
       this.currentExercise.forEach(exercise => {
         exercise.sets = exercise.sets.filter(set => set.id !== value.id)
@@ -42,17 +46,17 @@ export const useStore = defineStore('main', {
 
       this.currentExercise.forEach(exercise => {
         if(exercise.id === item.id) {
-          exercise.sets = [
-            ...exercise.sets,
+          exercise.sets.push(
             {
               id: lastId++,
               weight: weight,
               repeats: repeats,
-              setType: sets
+              setType: sets || ''
             }
-          ]
+          )
         }
       })
+
       item.isSettingsActive = false
     },
 
@@ -64,15 +68,14 @@ export const useStore = defineStore('main', {
         lastId = this.userWorkout[this.userWorkout.length - 1].id
       }
 
-      this.userWorkout.push({
+      this.userWorkout = [...this.userWorkout, {
         id: lastId + 1,
         userValue: workoutName,
         color: this.currentTaskColor,
         date: date,
         exercises: this.currentExercise,
-      })
+      }]
 
-      this.currentExercise = []
       this.currentTaskColor = '11, 128, 67'
     },
 

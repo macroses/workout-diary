@@ -49,7 +49,7 @@ const weightSetData = ref('')
 const repeatsSetData = ref('')
 const currentExerciseId = ref(0)
 
-let setType = null
+let setType = ref(null)
 
 const clear = () => {
   weightSetData.value = ''
@@ -62,10 +62,10 @@ const openSetSettings = (item) => {
   clear()
 }
 
-const getType = value => setType = value
+const getType = value => setType.value = value
 
 const storeSet = item => {
-  store.storeSet( item, weightSetData.value, repeatsSetData.value, setType)
+  store.storeSet( item, weightSetData.value, repeatsSetData.value, setType.value)
   clear()
 }
 </script>

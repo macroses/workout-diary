@@ -17,8 +17,7 @@
     <ModalConfirm 
       @dropBoolean="getConfirmBoolean"
       :isConfirm="isConfirm"
-      :title="`Удалить тренировку ${eventName.userValue}?`">
-    </ModalConfirm>
+      :title="`Удалить тренировку ${eventName.userValue}?`" />
   </div>
 </template>
 
@@ -29,7 +28,7 @@ import CalendarDates from "@/components/CalendarItem/CalendarDates";
 import WeekDays from "@/components/CalendarItem/WeekDays";
 import { useStore } from '../store/index';
 import { useDate } from "@/composables/useDate";
-import { ref } from 'vue';
+import {onUpdated, ref} from 'vue';
 
 const days = useDate()
 const store = useStore()
@@ -43,7 +42,6 @@ const toggleModal = (day) => {
   isModalOpen.value = !isModalOpen.value
   store.currentDayForCreateWorkout = day
   store.currentTaskColor = '11, 128, 67'
-  store.clearExercise()
 }
 
 const getConfirmBoolean = (bool) => {
@@ -58,6 +56,12 @@ const deleteWorkoutItem = (id) => {
   confirmId.value = id
   eventName.value = store.userWorkout.find(el => el.id === confirmId.value)
 }
+
+onUpdated(() => {
+  if(!isModalOpen.value) {
+    store.clearExercise()
+  }
+})
 </script>
 
 <style lang="scss" scoped>

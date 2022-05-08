@@ -4,13 +4,26 @@
       <div class="modal-box" v-if="isOpenTaskModal">
         <div class="layout" @click="close"></div>
         <div class="modal">
-          <div class="modal-top">
-            <div @click="close" class="icon-wrap">
-              <Icon class="closeIcon" iconName="xmark"/>
-            </div>
-          </div>
+          <ModalTaskTop
+            @closeModal="close"
+            :dateExercise="filteredItem.date"
+            />
           <div class="modal-content">
-
+            <div class="workout-name">{{ filteredItem.userValue }}</div>
+            <div class="exercises-table">
+              <div
+                  v-for="exercise in filteredItem.exercises"
+                  :key="exercise.id"
+                  class="exercise-item"
+              >
+                <div class="name">{{ exercise.name }}</div>
+                <div class="sets" v-for="set in exercise.sets">
+                  <div class="set weight">{{ set.weight }}</div>
+                  <div class="set repeats">{{ set.repeats }}</div>
+                  <div class="set load">{{ set.setType.color }}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -20,9 +33,9 @@
 
 <script setup>
 import TransitionFade from "@/components/UI/TransitionFade"
-import Icon from "@/components/UI/Icon";
+import ModalTaskTop from '@/components/ModalTask/ModalTaskTop'
 import { useStore } from "@/store";
-import {onMounted} from "vue";
+import {computed} from "vue";
 
 const store = useStore()
 
@@ -31,13 +44,10 @@ const props = defineProps({
   taskId: Number
 })
 
-onMounted(() => {
-  console.log(props.taskId)
-})
-
 const emit = defineEmits(['close'])
 const close = () => emit('close')
 
+const filteredItem = computed(() => store.readExerciseById(props.taskId))
 </script>
 
 <style lang="scss" scoped>
@@ -47,50 +57,64 @@ const close = () => emit('close')
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 500;
-  span {
-    display: inline-block;
-    padding: 1px 4px;
-    border-radius: 4px;
-  }
 }
 
 .modal {
   position: absolute;
   left: 50%;
   top: 50%;
-  min-height: 510px;
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);
   background: white;
   border-radius: 8px;
+  min-width: 500px;
 
   display: flex;
   flex-direction: column;
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,.14),
+              0 9px 46px 8px rgba(0,0,0,.12),
+              0 11px 15px -7px rgba(0,0,0,.2);
 }
 
 .modal-content {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  padding: 0 24px;
 }
 
-.modal-top {
+
+.workout-name {
+  font-size: 22px;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.name {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.sets {
   display: flex;
-  justify-content: space-between;
-  padding: 12px 16px;
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  border-radius: 4px;
+
+  &:nth-child(odd) {
+    background: var(--c-block-hover);
+  }
 }
 
-.closeIcon {
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
+.set {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
 }
-
 </style>

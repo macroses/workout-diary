@@ -68,7 +68,7 @@ const workoutNameToStore = () => {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.3);
+  //background: rgba(0, 0, 0, 0.3);
 }
 
 .title {
@@ -91,6 +91,9 @@ const workoutNameToStore = () => {
   transform: translate(-50%,-50%);
   background: white;
   border-radius: 8px;
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,.14),
+              0 9px 46px 8px rgba(0,0,0,.12),
+              0 11px 15px -7px rgba(0,0,0,.2);
 
   display: flex;
   flex-direction: column;

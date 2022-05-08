@@ -5,7 +5,7 @@
     :key="item.id"
     :style="{backgroundColor: 'rgba(' + item.color + ', 0.5)'}"
     :title="item.userValue"
-    @click.stop="openTaskModal()"
+    @click.stop="openTaskModal(item.id)"
   >
     <div class="task-name">{{ item.userValue }}</div>
     <div
@@ -20,7 +20,7 @@
   <ModalTask
     :isOpenTaskModal="isOpenTaskModal"
     @close="isOpenTaskModal = false"
-    :taskId="item.id"
+    :taskId="taskId"
   />
 </template>
 
@@ -35,6 +35,7 @@ const props = defineProps({
 })
 
 const isOpenTaskModal = ref(false)
+const taskId = ref(0)
 
 const emit = defineEmits(['deleteWorkoutItem'])
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
@@ -49,8 +50,9 @@ const checkEqualDates = (date) => {
   })
 }
 
-const openTaskModal = () => {
+const openTaskModal = (id) => {
   isOpenTaskModal.value = true
+  taskId.value = id
 }
 </script>
 
