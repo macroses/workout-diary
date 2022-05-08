@@ -10,20 +10,26 @@
             />
           <div class="modal-content">
             <div class="workout-name">{{ filteredItem.userValue }}</div>
-            <div class="exercises-table">
-              <div
+            <ul class="exercises-table">
+              <li
                   v-for="exercise in filteredItem.exercises"
                   :key="exercise.id"
                   class="exercise-item"
               >
                 <div class="name">{{ exercise.name }}</div>
-                <div class="sets" v-for="set in exercise.sets">
+                <div class="sets" v-for="(set, index) in exercise.sets">
+                  <div class="set num">{{ index + 1 }}</div>
                   <div class="set weight">{{ set.weight }}</div>
                   <div class="set repeats">{{ set.repeats }}</div>
-                  <div class="set load">{{ set.setType.color }}</div>
+                  <div class="set load">
+                    <div
+                        :style="{backgroundColor: set.setType.color}"
+                        class="load-color"></div>
+                    <span>{{ set.setType.name }}</span>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -96,7 +102,13 @@ const filteredItem = computed(() => store.readExerciseById(props.taskId))
 
 .name {
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-top: -11px;
+  margin-left: 12px;
+  width: max-content;
+  padding: 0 4px;
+  background-color: var(--c-bg);
+  color: var(--c-text-light);
+  font-weight: 600;
 }
 
 .sets {
@@ -113,8 +125,24 @@ const filteredItem = computed(() => store.readExerciseById(props.taskId))
 }
 
 .set {
-  flex: 1;
-  text-align: center;
-  font-weight: 600;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+
+  &.num {
+    flex: 0 1 30px;
+  }
+}
+
+.exercise-item {
+  margin-bottom: 24px;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+}
+
+.load-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
 }
 </style>
