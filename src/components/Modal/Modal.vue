@@ -55,6 +55,7 @@ const close = () => emits('close')
 const getTaskColor = (data) => currentColor.value = data
 
 const workoutNameToStore = () => {
+  if(!workoutName.value) return
   store.workoutNameToStore(workoutName.value, props.dayData.format('D.MM.Y'))
   workoutName.value = ''
   close()
