@@ -13,15 +13,10 @@
         class="icon-wrap"
         title="удалить тренировку">
       <Icon
-          class="delete-task"
-          iconName="xmark"/>
+        class="delete-task"
+        iconName="xmark"/>
     </div>
   </div>
-  <ModalTask
-    :isOpenTaskModal="isOpenTaskModal"
-    @close="isOpenTaskModal = false"
-    :taskId="taskId"
-  />
 </template>
 
 <script setup>
@@ -34,11 +29,11 @@ const props = defineProps({
   day: Object
 })
 
-const isOpenTaskModal = ref(false)
-const taskId = ref(0)
-
 const emit = defineEmits(['deleteWorkoutItem'])
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
+const openTaskModal = (value) => {
+  emit('openTaskModal', value)
+}
 
 const store = useStore()
 
@@ -48,11 +43,6 @@ const checkEqualDates = (date) => {
       return el.userValue
     }
   })
-}
-
-const openTaskModal = (id) => {
-  isOpenTaskModal.value = true
-  taskId.value = id
 }
 </script>
 

@@ -15,7 +15,8 @@
     <transition name="slide" mode="out-in">
       <span :key="day" class="day-num">{{ day.format('D') }}</span>
     </transition>
-    <CalendarDayTasks 
+    <CalendarDayTasks
+      @openTaskModal="openTaskModal"
       @deleteWorkoutItem="deleteWorkoutItem"
       :day="day"/>
   </li>
@@ -45,9 +46,12 @@ const moreHeight = {
   height: 'calc((100vh / 6) - 15px'
 }
 
-const emit = defineEmits(['toggleModal'])
+const emit = defineEmits(['toggleModal', 'openTaskModal'])
 const toggleModal = (value) => emit('toggleModal', value)
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
+const openTaskModal = (value) => {
+  emit('openTaskModal', value)
+}
 </script>
 
 <style lang="scss" scoped>

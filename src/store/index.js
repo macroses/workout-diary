@@ -49,8 +49,8 @@ export const useStore = defineStore('main', {
           exercise.sets.push(
             {
               id: lastId++,
-              weight: weight,
-              repeats: repeats,
+              weight,
+              repeats,
               setType: sets || ''
             }
           )
@@ -61,10 +61,10 @@ export const useStore = defineStore('main', {
     },
 
     workoutNameToStore(workoutName, date) {
-      if(!workoutName) return
+      if (!workoutName) return
       let lastId = 0
 
-      if(this.userWorkout.length) {
+      if (this.userWorkout.length) {
         lastId = this.userWorkout[this.userWorkout.length - 1].id
       }
 
@@ -72,7 +72,7 @@ export const useStore = defineStore('main', {
         id: lastId + 1,
         userValue: workoutName,
         color: this.currentTaskColor,
-        date: date,
+        date,
         exercises: this.currentExercise,
       }]
 
