@@ -54,6 +54,7 @@ const props = defineProps({
   text-overflow: ellipsis;
   margin-bottom: 24px;
   font-weight: 500;
+  color: var(--c-text);
 }
 
 .name {
@@ -73,6 +74,7 @@ const props = defineProps({
   width: 100%;
   font-size: 12px;
   border-radius: 4px;
+  color: var(--c-text-light);
 
   &:nth-child(odd) {
     background: var(--c-block-hover);

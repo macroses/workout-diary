@@ -100,6 +100,7 @@ const editSet = (item) => item.isSettingActive = !item.isSettingActive
   align-items: center;
   font-size: 13px;
   font-weight: 500;
+  color: var(--c-text);
   svg {
     width: 13px;
     height: 13px;
@@ -112,6 +113,8 @@ const editSet = (item) => item.isSettingActive = !item.isSettingActive
     height: 24px;
     border-radius: 4px;
     border: 1px solid var(--c-border);
+    background-color: var(--c-input);
+    color: var(--c-text);
     font-weight: 500;
     font-family: 'Open Sans', sans-serif;
   }

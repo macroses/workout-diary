@@ -5,6 +5,7 @@
     <Logo/>
     <Button @click="resetDate" :title="now.format('dddd, Do MMM')">Сегодня</Button>
     <CurrentDate />
+    <ToggleTheme />
   </header>
 </template>
 
@@ -16,6 +17,7 @@ import CurrentDate from "@/components/HeaderCurrentDate/CurrentDate"
 import AddTaskButton from "@/components/AddTaskButton/AddTaskButton"
 import moment from 'moment'
 import { useStore } from '@/store'
+import ToggleTheme from "@/components/ToggleTheme/ToggleTheme";
 
 const store = useStore()
 

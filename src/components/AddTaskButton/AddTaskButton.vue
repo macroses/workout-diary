@@ -61,7 +61,7 @@ useOnClickOutside(taskOptionsList, () => isOptionsListOpen.value = false)
   border-radius: 28px;
   padding-left: 0;
   cursor: pointer;
-  color: var(--c-bg);
+  color: var(--c-text-invert);
   background: var(--c-accent);
   box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%),
               0 2px 2px 0 rgb(0 0 0 / 14%),
@@ -81,7 +81,7 @@ useOnClickOutside(taskOptionsList, () => isOptionsListOpen.value = false)
 }
 
 svg {
-  fill: var(--c-bg);
+  fill: var(--c-text-invert);
 }
 
 .add_task_options {

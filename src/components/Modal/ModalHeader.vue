@@ -44,15 +44,17 @@ const updateValue = (event) => emit('update:modelValue', event.target.value)
 }
 
 .inp-workoutName {
-  border: 0;
   width: 100%;
-  border-bottom: 1px solid var(--c-border);
-  padding: 4px 0;
+  border: 1px solid var(--c-border);
+  background-color: var(--c-input);
+  color: var(--c-text);
+  border-radius: 6px;
+  padding: 8px;
   font-size: 14px;
   outline: none;
   transition: all 0.3s;
   &:focus {
-    border-bottom-color: var(--c-accent);
+    border-color: var(--c-accent);
   }
 
   &::placeholder {

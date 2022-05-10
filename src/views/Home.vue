@@ -18,6 +18,7 @@
       :isConfirm="isConfirm"
       :title="`Удалить тренировку ${eventName.userValue}?`" />
     <ModalTask
+      @editItem="openEditModal"
       @close="isOpenTaskModal = false"
       @deleteItem="deleteWorkoutItem"
       :isOpenTaskModal="isOpenTaskModal"
@@ -52,6 +53,7 @@ const toggleModal = (day) => {
   store.currentTaskColor = '11, 128, 67'
 }
 
+// подтверждение из конфирма
 const getConfirmBoolean = (bool) => {
   if(bool) {
     store.userWorkout = store.userWorkout.filter(el => el.id !== confirmId.value);
@@ -60,17 +62,30 @@ const getConfirmBoolean = (bool) => {
   isConfirm.value = false
 }
 
+// удалить упражнение
 const deleteWorkoutItem = (id) => {
   isConfirm.value = true
   confirmId.value = id
   eventName.value = store.userWorkout.find(el => el.id === confirmId.value)
 }
 
+// модалка чтения упражнения
 const openTaskModal = (id) => {
+
+
   isOpenTaskModal.value = true
   taskId.value = id
 }
 
+// модалка редактирования из модалкаи чтения упражнения
+const openEditModal = (id) => {
+  isModalOpen.value = !isModalOpen.value
+  isOpenTaskModal.value = false
+
+  store.currentExercise = store.userWorkout.filter(el => el.id === id)
+}
+
+// очищаем текущую тренировку при закрытии основного модального окна
 onUpdated(() => {
   if(!isModalOpen.value) {
     store.clearExercise()

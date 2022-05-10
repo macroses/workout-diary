@@ -29,7 +29,7 @@
 <script setup>
 import DropdownColor from "@/components/UI/DropdownColor"
 import ModalTop from "@/components/Modal/ModalTop"
-import { ref } from "vue";
+import { ref, watch} from "vue";
 import { vFocusOnLoad } from "@/directives/myDirectives"
 import { useStore } from '@/store'
 import ModalAddExercise from "@/components/Modal/ModalAddExercise"
@@ -60,6 +60,16 @@ const workoutNameToStore = () => {
   workoutName.value = ''
   close()
 }
+
+// todo: тут остановился на передаче из таска в инпут настроек
+watch(() => store.currentExercise.length, value => {
+  if(value === 1) {
+    workoutName.value = store.currentExercise[0].userValue
+  }
+  else {
+    workoutName.value = ''
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -69,7 +79,6 @@ const workoutNameToStore = () => {
   bottom: 0;
   left: 0;
   right: 0;
-  //background: rgba(0, 0, 0, 0.3);
 }
 
 .title {
@@ -90,11 +99,10 @@ const workoutNameToStore = () => {
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);
-  background: white;
+  background: var(--c-bg);
   border-radius: 8px;
-  box-shadow: 0 24px 38px 3px rgba(0,0,0,.14),
-              0 9px 46px 8px rgba(0,0,0,.12),
-              0 11px 15px -7px rgba(0,0,0,.2);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-block);
 
   display: flex;
   flex-direction: column;

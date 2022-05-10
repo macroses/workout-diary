@@ -5,6 +5,7 @@
         <div class="layout" @click="close"></div>
         <div class="modal">
           <ModalTaskTop
+            @editItem="editItem"
             @closeModal="close"
             @deleteItem="deleteItem"
             :dateExercise="filteredItem.date"
@@ -30,9 +31,10 @@ const props = defineProps({
   taskId: Number
 })
 
-const emit = defineEmits(['close', 'deleteItem'])
+const emit = defineEmits(['close', 'deleteItem', 'editItem'])
 const close = () => emit('close')
 const deleteItem = () => emit('deleteItem', props.taskId)
+const editItem = () => emit('editItem', props.taskId)
 
 const filteredItem = computed(() => store.readExerciseById(props.taskId))
 </script>
@@ -53,7 +55,8 @@ const filteredItem = computed(() => store.readExerciseById(props.taskId))
   max-height: calc(100vh - 4em);
   overflow: auto;
   transform: translate(-50%,-50%);
-  background: white;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg);
   border-radius: 8px;
   min-width: 500px;
 

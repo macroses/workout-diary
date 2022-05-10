@@ -25,7 +25,7 @@ div {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--c-bg);
+  background: var(--c-button);
   border: 1px solid var(--c-border);
   border-radius: 4px;
   padding: 5px 12px;
@@ -47,7 +47,7 @@ div {
 }
 
 .accentBtn {
-  color: var(--c-bg);
+  color: var(--c-text-invert);
   background: var(--c-accent);
   &:hover {
     background: var(--c-accent-hover);

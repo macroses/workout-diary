@@ -55,6 +55,7 @@ const dropBoolean = val => emit('dropBoolean', val)
 .confirm {
   border-radius: 6px;
   background: var(--c-bg);
+  border: 1px solid var(--c-border);
   min-width: 300px;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
 
@@ -73,6 +74,7 @@ const dropBoolean = val => emit('dropBoolean', val)
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: var(--c-text);
 }
 
 .btn-group {

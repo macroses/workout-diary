@@ -102,6 +102,7 @@ const createNewGroup = () => {
   cursor: pointer;
   font-size: 13px;
   border-right: 6px solid transparent;
+  color: var(--c-text);
   &:hover {
     background-color: var(--c-block-hover);
   }

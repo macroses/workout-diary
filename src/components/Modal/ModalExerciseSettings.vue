@@ -61,5 +61,7 @@ input {
   border-radius: 4px;
   padding: 0 6px;
   height: 26px;
+  color: var(--c-text);
+  background-color: var(--c-input);
 }
 </style>

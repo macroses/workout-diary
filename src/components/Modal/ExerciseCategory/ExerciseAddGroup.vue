@@ -17,6 +17,7 @@ import Icon from "@/components/UI/Icon";
   padding: 8px 16px;
   cursor: pointer;
   font-size: 13px;
+  color: var(--c-text);
   &:hover {
     background-color: var(--c-block-hover);
   }

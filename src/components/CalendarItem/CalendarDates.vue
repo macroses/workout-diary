@@ -60,6 +60,7 @@ li {
   border-bottom: 1px solid var(--c-border);
   text-align: center;
   padding: 3px;
+  color: var(--c-text);
 
   gap: 1px;
   display: grid;

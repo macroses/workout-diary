@@ -52,7 +52,7 @@ const checkEqualDates = (date) => {
   text-align: left;
   font-size: 11px;
   padding: 2px 8px;
-  color: var(--c-bg);
+  color: var(--c-text-invert);
   height: 36px;
   overflow: hidden;
   border-radius: 2px;
@@ -95,6 +95,6 @@ const checkEqualDates = (date) => {
 .delete-task {
   width: 14px;
   height: 14px;
-  fill: var(--c-bg);
+  fill: var(--c-text-invert);
 }
 </style>

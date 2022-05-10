@@ -19,6 +19,7 @@ const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс",]
   grid-area: weekdays;
   li {
     border-right: 1px solid var(--c-border);
+    color: var(--c-text);
     text-transform: uppercase;
     font-size: 11px;
     line-height: 20px;

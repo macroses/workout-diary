@@ -57,13 +57,13 @@ const close = () => emit('close')
   color: var(--c-text-light);
 
   &.saveIcon {
-    color: var(--c-bg);
+    color: var(--c-text-invert);
     cursor: pointer;
   }
 }
 
 .check-icon {
-  fill: var(--c-bg);
+  fill: var(--c-text-invert);
   width: 18px;
   height: 18px;
   margin-left: 8px;
@@ -73,7 +73,7 @@ const close = () => emit('close')
   cursor: pointer;
   width: 18px;
   height: 18px;
-  fill: var(--c-bg);
+  fill: var(--c-text-invert);
 }
 
 .icon-wrap {
