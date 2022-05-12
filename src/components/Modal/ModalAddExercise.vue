@@ -36,7 +36,7 @@
 <script setup>
 import Icon from '@/components/UI/Icon'
 import Exercises from '@/api/api'
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, watch} from 'vue'
 import { useStore } from '@/store'
 import ModalExercisesList from "@/components/Modal/ModalExercisesList"
 import ModelChosenExercises from "@/components/Modal/ModelChosenExercises"
@@ -56,6 +56,13 @@ onMounted(async() => {
   exerciseGroups.value = await Exercises.getExercisesGroup()
   exercisesList.value = await Exercises.getExercisesList()
 })
+
+watch(() => store.isEditModal, value => {
+
+  if(value) {
+    
+  }
+}, { immediate: true })
 
 const selectGroupId = (id, index) => {
   exercisesGroupId.value = id

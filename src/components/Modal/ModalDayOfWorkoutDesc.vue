@@ -1,10 +1,9 @@
 <template>
   <div
-      class="day-of-workout__desc"
-      :class="{ today: useDateEquality(dayData) }">
+      class="day-of-workout__desc">
     Дата тренировки:
     <span>
-      {{ useDateEquality(dayData) ? "сегодня" : dayData.format('D.MM.Y') }}
+      {{ dayData}}
     </span>
     <span
         @click="resetExerciseStore"
@@ -13,11 +12,10 @@
 </template>
 
 <script setup>
-import { useDateEquality } from "@/composables/useDate";
 import { useStore } from "@/store";
 
 const props = defineProps({
-  dayData: Object
+  dayData: String
 })
 
 const store = useStore()

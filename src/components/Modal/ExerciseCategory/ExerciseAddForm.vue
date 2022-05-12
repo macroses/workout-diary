@@ -30,8 +30,6 @@
 <script setup>
 import Button from '@/components/UI/Button'
 
-// ToDo: добавить возможность выбора иконок для группы
-
 const props = defineProps({
   groupName: String,
   isNewGroupVisible: Boolean

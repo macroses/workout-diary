@@ -63,9 +63,6 @@ import { useStore } from '@/store'
 import { useOnlyNumbers } from "@/composables/useOnlyNumbers"
 import Icon from "@/components/UI/Icon";
 
-// Todo: добавить редактирование типа нагрузки
-// Todo: рефакторинг компонента сетов
-
 const props = defineProps({
   sets: Array
 })

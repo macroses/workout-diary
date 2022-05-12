@@ -5,15 +5,14 @@
         <div class="layout" @click="close"></div>
         <div class="modal">
           <ModalTop
-              @close="close"
-              @workoutNameToStore="workoutNameToStore"
-              :workoutName="workoutName"
-              :dayData="dayData"
+            @close="close"
+            @workoutNameToStore="workoutNameToStore"
+            :workoutName="workoutName"
           />
           <ModalHeader
-              @dropNameToStore="workoutNameToStore"
-              :isWorkoutName="isWorkoutName"
-              v-model="workoutName"
+            @dropNameToStore="workoutNameToStore"
+            :isWorkoutName="isWorkoutName"
+            v-model="workoutName"
           />
           <div class="modal-content">
             <DropdownColor @dropColor="getTaskColor"/>
@@ -42,7 +41,7 @@ const props = defineProps({
   isWorkoutNameActive: Boolean,
   isNewGroupActive: Boolean,
   title: String,
-  dayData: Object,
+  dayData: String,
 })
 
 const workoutName = ref('')
@@ -56,14 +55,13 @@ const getTaskColor = (data) => currentColor.value = data
 
 const workoutNameToStore = () => {
   if(!workoutName.value) return
-  store.workoutNameToStore(workoutName.value, props.dayData.format('D.MM.Y'))
+  store.workoutNameToStore(workoutName.value, props.dayData)
   workoutName.value = ''
   close()
 }
 
-// todo: тут остановился на передаче из таска в инпут настроек
-watch(() => store.currentExercise.length, value => {
-  if(value === 1) {
+watch(() => store.isEditModal, value => {
+  if(value) {
     workoutName.value = store.currentExercise[0].userValue
   }
   else {

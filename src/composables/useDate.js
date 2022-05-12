@@ -5,7 +5,7 @@ export function useDate() {
 
   const monthDate = dayContext.startOf('month')
 
-  return [...Array(monthDate.daysInMonth())].map((_, i) => monthDate.clone().add(i, 'day'))
+  return [...Array(monthDate.daysInMonth())].map((_, i) => monthDate.clone().add(i, 'day').format('D.MM.Y'))
 }
 
 export function useDateEquality(day) {

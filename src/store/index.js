@@ -11,7 +11,8 @@ export const useStore = defineStore('main', {
     usersGroupName: '',
     userWorkout: [],
     currentExercise: [],
-    currentTaskColor: '' || '11, 128, 67'
+    currentTaskColor: '' || '11, 128, 67',
+    isEditModal: false
   }),
   actions: {
     clearExercise(array) {

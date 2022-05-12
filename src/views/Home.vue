@@ -49,8 +49,13 @@ const taskId = ref(0)
 
 const toggleModal = (day) => {
   isModalOpen.value = !isModalOpen.value
-  store.currentDayForCreateWorkout = day
+
+  if(day) {
+    store.currentDayForCreateWorkout = day.format('D.MM.Y')
+  }
+
   store.currentTaskColor = '11, 128, 67'
+  store.isEditModal = false
 }
 
 // подтверждение из конфирма
@@ -71,18 +76,24 @@ const deleteWorkoutItem = (id) => {
 
 // модалка чтения упражнения
 const openTaskModal = (id) => {
-
-
   isOpenTaskModal.value = true
   taskId.value = id
 }
 
 // модалка редактирования из модалкаи чтения упражнения
+// заполняем модалку данными из стора, если нажали редактирование
 const openEditModal = (id) => {
   isModalOpen.value = !isModalOpen.value
   isOpenTaskModal.value = false
 
-  store.currentExercise = store.userWorkout.filter(el => el.id === id)
+  let thisExercises = store.userWorkout.filter(el => el.id === id)
+  
+  store.currentExercise = thisExercises[0].exercises
+  store.currentDayForCreateWorkout = thisExercises[0].date
+  //Todo: Передавать в инпут модалки значение из стора
+  if(store.currentExercise[0]) {
+    store.isEditModal = true
+  }
 }
 
 // очищаем текущую тренировку при закрытии основного модального окна
