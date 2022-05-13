@@ -28,7 +28,7 @@
 <script setup>
 import DropdownColor from "@/components/UI/DropdownColor"
 import ModalTop from "@/components/Modal/ModalTop"
-import { ref, watch} from "vue";
+import { onBeforeUpdate, onUpdated, ref, watch} from "vue";
 import { vFocusOnLoad } from "@/directives/myDirectives"
 import { useStore } from '@/store'
 import ModalAddExercise from "@/components/Modal/ModalAddExercise"
@@ -42,6 +42,8 @@ const props = defineProps({
   isNewGroupActive: Boolean,
   title: String,
   dayData: String,
+  userValue: String,
+  taskEditId: Number
 })
 
 const workoutName = ref('')
@@ -54,15 +56,19 @@ const close = () => emits('close')
 const getTaskColor = (data) => currentColor.value = data
 
 const workoutNameToStore = () => {
+
   if(!workoutName.value) return
   store.workoutNameToStore(workoutName.value, props.dayData)
   workoutName.value = ''
   close()
+
+  console.log(store.taskEditId)
+// если id совпадает, то тренировку удалить и записать новую из редактирования
 }
 
-watch(() => store.isEditModal, value => {
-  if(value) {
-    workoutName.value = store.currentExercise[0].userValue
+onBeforeUpdate(() => {
+  if(store.isEditModal) {
+    workoutName.value = props.userValue
   }
   else {
     workoutName.value = ''

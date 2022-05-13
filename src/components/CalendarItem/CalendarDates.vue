@@ -61,6 +61,7 @@ li {
   text-align: center;
   padding: 3px;
   color: var(--c-text);
+  transition: 0.3s;
 
   gap: 1px;
   display: grid;

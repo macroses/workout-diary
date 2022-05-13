@@ -43,7 +43,7 @@ const colorCollection = [
 const store = useStore()
 const container = ref(null)
 
-const defaultColor = ref('11, 128, 67')
+const defaultColor = ref(store.currentTaskColor)
 const isDropDownActive = ref(false)
 
 const toggleDropdown = () => isDropDownActive.value = !isDropDownActive.value

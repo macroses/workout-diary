@@ -12,7 +12,8 @@ export const useStore = defineStore('main', {
     userWorkout: [],
     currentExercise: [],
     currentTaskColor: '' || '11, 128, 67',
-    isEditModal: false
+    isEditModal: false,
+    taskEditId: null
   }),
   actions: {
     clearExercise(array) {
@@ -61,7 +62,7 @@ export const useStore = defineStore('main', {
       item.isSettingsActive = false
     },
 
-    workoutNameToStore(workoutName, date) {
+    workoutNameToStore(workoutName, date, id) {
       if (!workoutName) return
       let lastId = 0
 

@@ -12,6 +12,7 @@
       :dayData="store.currentDayForCreateWorkout"
       :isModalActive="isModalOpen"
       :isNewGroupActive="isNewGroupActive"
+      :userValue="userWorkoutName"
       @close="toggleModal" />
     <ModalConfirm 
       @dropBoolean="getConfirmBoolean"
@@ -44,6 +45,8 @@ const isConfirm = ref(false)
 const confirmId = ref(0)
 const eventName = ref('')
 
+const userWorkoutName = ref('')
+
 const isOpenTaskModal = ref(false)
 const taskId = ref(0)
 
@@ -58,10 +61,10 @@ const toggleModal = (day) => {
   store.isEditModal = false
 }
 
-// подтверждение из конфирма
+// подтверждение удаления тренировки из конфирма
 const getConfirmBoolean = (bool) => {
   if(bool) {
-    store.userWorkout = store.userWorkout.filter(el => el.id !== confirmId.value);
+    store.userWorkout = store.userWorkout.filter(el => el.id !== confirmId.value)
     isOpenTaskModal.value = false
   }
   isConfirm.value = false
@@ -90,10 +93,14 @@ const openEditModal = (id) => {
   
   store.currentExercise = thisExercises[0].exercises
   store.currentDayForCreateWorkout = thisExercises[0].date
-  //Todo: Передавать в инпут модалки значение из стора
-  if(store.currentExercise[0]) {
-    store.isEditModal = true
-  }
+  store.currentTaskColor = thisExercises[0].color
+  userWorkoutName.value = thisExercises[0].userValue
+
+  store.isEditModal = true
+
+  store.taskEditId = id
+
+  store.userWorkout = store.userWorkout.filter(el => el.id !== store.taskEditId)
 }
 
 // очищаем текущую тренировку при закрытии основного модального окна

@@ -26,6 +26,10 @@ const props = defineProps({
   exercisesList: Array
 })
 
+// ToDo: взять редактируемое упражнение из стора
+// узнать id упражнения
+// проставить exercise.isSelected на совпадающие id
+
 const computedColor = computed(() => `rgb(${store.currentTaskColor})`)
 const currentValue = computed(() => props.exercisesList.filter(el => el.categoryId === props.groupId))
 

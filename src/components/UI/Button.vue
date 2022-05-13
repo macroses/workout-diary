@@ -34,6 +34,8 @@ div {
   cursor: pointer;
   min-height: 36px;
   max-height: 36px;
+  transition: 0.3s;
+
   &:hover {
     background: var(--c-block-hover);
   }
