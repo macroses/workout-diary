@@ -34,11 +34,11 @@ export const useStore = defineStore('main', {
     selectExerciseId(exercise) {
       exercise.isSelected = !exercise.isSelected
 
-      if(!this.currentExercise.includes(exercise)) {
-        this.currentExercise = [...this.currentExercise, exercise]
+      if(this.currentExercise.includes(exercise)) {
+        this.currentExercise = this.currentExercise.filter(el => el.name !== exercise.name)
       }
       else {
-        this.currentExercise = this.currentExercise.filter(el => el.id !== exercise.id)
+        this.currentExercise = [...this.currentExercise, exercise]
       }
     },
 

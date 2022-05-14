@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import {computed, ref, watch} from "vue"
+import {computed, onBeforeMount, onBeforeUpdate, onUpdated, ref, watch} from "vue"
 import {useStore} from "@/store"
 import Icon from "@/components/UI/Icon.vue"
 
@@ -26,12 +26,11 @@ const props = defineProps({
   exercisesList: Array
 })
 
-// ToDo: взять редактируемое упражнение из стора
-// узнать id упражнения
-// проставить exercise.isSelected на совпадающие id
-
 const computedColor = computed(() => `rgb(${store.currentTaskColor})`)
-const currentValue = computed(() => props.exercisesList.filter(el => el.categoryId === props.groupId))
+
+const currentValue = computed(() => {
+  return props.exercisesList.filter(el => el.categoryId === props.groupId)
+})
 
 watch(() => store.currentExercise, (value) => {
   if(!value.length) {
@@ -42,11 +41,32 @@ watch(() => store.currentExercise, (value) => {
   }
 })
 
+onBeforeUpdate(() => {
+  if(store.isEditModal) {
+    store.currentExercise.forEach(el => {
+      props.exercisesList.forEach(propEl => {
+        if(el.id === propEl.id) {
+          propEl.isSelected = true
+        }
+      })
+    })
+  }
+})
+
+
 const activeColorObj = ref({
   borderRightColor: computedColor
 })
 
-const selectExerciseId = exercise => store.selectExerciseId(exercise)
+const selectExerciseId = exercise => {
+  if(exercise.isSelected && store.isEditModal) {
+    exercise.isSelected = !exercise.isSelected
+    store.currentExercise = store.currentExercise.filter(el => el.id !== exercise.id)
+    return
+  }
+
+  store.selectExerciseId(exercise)
+}
 </script>
 
 <style scoped lang="scss">

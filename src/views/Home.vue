@@ -47,7 +47,7 @@ const eventName = ref('')
 
 const userWorkoutName = ref('')
 
-const isOpenTaskModal = ref(false)
+let isOpenTaskModal = ref(false)
 const taskId = ref(0)
 
 const toggleModal = (day) => {

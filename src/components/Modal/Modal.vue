@@ -62,7 +62,7 @@ const workoutNameToStore = () => {
   workoutName.value = ''
   close()
 
-  console.log(store.taskEditId)
+  // console.log(store.taskEditId)
 // если id совпадает, то тренировку удалить и записать новую из редактирования
 }
 
