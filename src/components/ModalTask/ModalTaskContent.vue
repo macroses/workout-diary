@@ -74,7 +74,7 @@ const props = defineProps({
   width: 100%;
   font-size: 12px;
   border-radius: 4px;
-  color: var(--c-text-light);
+  color: var(--c-text);
 
   &:nth-child(odd) {
     background: var(--c-block-hover);

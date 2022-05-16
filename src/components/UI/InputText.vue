@@ -3,7 +3,7 @@
     <input 
       type="text" 
       v-model="inputValue" 
-      :placeholder="pholder"
+      :placeholder="placeholder"
       @input="userInput">
   </div>
 </template>
@@ -11,7 +11,7 @@
 <script setup>
 const props = defineProps({
   inputValue: { type: String },
-  pholder: { type: String }
+  placeholder: { type: String }
 })
 
 const emit = defineEmits(["userInput"])
@@ -19,8 +19,6 @@ const emit = defineEmits(["userInput"])
 const userInput = () => {
   emit("userInput", props.inputValue)
 }
-
-
 </script>
 
 <style lang="scss" scoped>

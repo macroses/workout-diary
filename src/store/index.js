@@ -1,8 +1,8 @@
 import { defineStore } from "pinia"
 import moment from "moment";
+import {useUniqueId} from "@/composables/useUniqueId";
 
 moment.locale('ru')
-let lastId = 0
 
 export const useStore = defineStore('main', {
   state: () => ({
@@ -31,13 +31,23 @@ export const useStore = defineStore('main', {
       })
     },
 
-    // copySetItem(value) {
-    //   this.currentExercise.forEach(exercise => {
-    //     exercise.sets = exercise.sets.forEach(set => {
-    //       console.log(value)
-    //     })
-    //   })
-    // },
+    copySetItem(value) {
+      let {id, repeats, setType, weight} = value
+
+      this.currentExercise.forEach(exercise => {
+        exercise.sets.forEach(set => {
+
+          if(set.id === id) {
+            exercise.sets = [...exercise.sets, {
+              id: useUniqueId(),
+              repeats,
+              setType,
+              weight
+            }]
+          }
+        })
+      })
+    },
 
     selectExerciseId(exercise) {
       if (exercise.isSelected && this.isEditModal) {
@@ -64,7 +74,7 @@ export const useStore = defineStore('main', {
         if(exercise.id === item.id) {
           exercise.sets.push(
             {
-              id: lastId++,
+              id: useUniqueId(),
               weight,
               repeats,
               setType: sets || ''
@@ -76,16 +86,11 @@ export const useStore = defineStore('main', {
       item.isSettingsActive = false
     },
 
-    workoutNameToStore(workoutName, date, id) {
+    workoutNameToStore(workoutName, date) {
       if (!workoutName) return
-      let lastId = 0
-
-      if (this.userWorkout.length) {
-        lastId = this.userWorkout[this.userWorkout.length - 1].id
-      }
 
       this.userWorkout = [...this.userWorkout, {
-        id: lastId + 1,
+        id: useUniqueId(),
         userValue: workoutName,
         color: this.currentTaskColor,
         date,

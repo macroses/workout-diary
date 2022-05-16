@@ -14,6 +14,7 @@
     </div>
 
     <div
+        v-if="!store.isEditModal"
         @click="close"
         class="icon-wrap">
       <Icon

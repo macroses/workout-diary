@@ -1,9 +1,9 @@
 <template>
-  <div class="name">
+  <div
+    @click="openSetSettings"
+    class="name">
     {{exercise.name}}
-    <div class="icon-area"
-      @click="openSetSettings"
-    >
+    <div class="icon-area">
       <Icon iconName="plus"/>
     </div>
   </div>
@@ -30,7 +30,7 @@ const openSetSettings = () => emit('openSetSettings')
   justify-content: space-between;
   padding: 0 8px 0 16px;
   color: var(--c-text);
-
+  cursor: pointer;
   svg {
     width: 14px;
     height: 14px;
@@ -38,7 +38,7 @@ const openSetSettings = () => emit('openSetSettings')
 
   .icon-area {
     padding: 6px;
-    cursor: pointer;
+
   }
 }
 </style>

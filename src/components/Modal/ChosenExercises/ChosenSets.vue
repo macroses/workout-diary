@@ -46,8 +46,8 @@
               @click="editSet(set)"
               class="set-settings-icon__item">
               <Icon
-                  :iconName="!set.isSettingActive ? 'marker' : 'check'"
-                  :style="[set.isSettingActive ? 'fill: green': '']"
+                :iconName="!set.isSettingActive ? 'marker' : 'check'"
+                :style="[set.isSettingActive ? 'fill: green': '']"
               />
             </div>
             <div
@@ -75,23 +75,7 @@ const props = defineProps({
 const store = useStore()
 const deleteSetItem = item => store.deleteSetItem(item)
 const editSet = (item) => item.isSettingActive = !item.isSettingActive
-const copySetItem = (item) => {
-  let {id, repeats, setType, weight} = item
-
-  store.currentExercise.forEach(exercise => {
-    exercise.sets.forEach((set, index) => {
-
-      if(set.id === id) {
-        exercise.sets = [...exercise.sets, {
-          id: Math.floor(Math.random() * Date.now()),
-          repeats,
-          setType,
-          weight
-        }]
-      }
-    })
-  })
-}
+const copySetItem = (item) => store.copySetItem(item)
 </script>
 
 <style lang="scss" scoped>
