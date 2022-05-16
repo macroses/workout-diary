@@ -31,7 +31,21 @@ export const useStore = defineStore('main', {
       })
     },
 
+    // copySetItem(value) {
+    //   this.currentExercise.forEach(exercise => {
+    //     exercise.sets = exercise.sets.forEach(set => {
+    //       console.log(value)
+    //     })
+    //   })
+    // },
+
     selectExerciseId(exercise) {
+      if (exercise.isSelected && this.isEditModal) {
+        exercise.isSelected = !exercise.isSelected
+        this.currentExercise = this.currentExercise.filter(el => el.id !== exercise.id)
+        return
+      }
+
       exercise.isSelected = !exercise.isSelected
 
       if(this.currentExercise.includes(exercise)) {

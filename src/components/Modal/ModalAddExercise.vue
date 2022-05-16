@@ -57,13 +57,6 @@ onMounted(async() => {
   exercisesList.value = await Exercises.getExercisesList()
 })
 
-watch(() => store.isEditModal, value => {
-
-  if(value) {
-    
-  }
-}, { immediate: true })
-
 const selectGroupId = (id, index) => {
   exercisesGroupId.value = id
   activeGroupNameItem.value = index

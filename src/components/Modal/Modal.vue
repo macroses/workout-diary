@@ -56,14 +56,10 @@ const close = () => emits('close')
 const getTaskColor = (data) => currentColor.value = data
 
 const workoutNameToStore = () => {
-
   if(!workoutName.value) return
   store.workoutNameToStore(workoutName.value, props.dayData)
   workoutName.value = ''
   close()
-
-  // console.log(store.taskEditId)
-// если id совпадает, то тренировку удалить и записать новую из редактирования
 }
 
 onBeforeUpdate(() => {

@@ -58,15 +58,8 @@ const activeColorObj = ref({
   borderRightColor: computedColor
 })
 
-const selectExerciseId = exercise => {
-  if(exercise.isSelected && store.isEditModal) {
-    exercise.isSelected = !exercise.isSelected
-    store.currentExercise = store.currentExercise.filter(el => el.id !== exercise.id)
-    return
-  }
+const selectExerciseId = exercise => store.selectExerciseId(exercise)
 
-  store.selectExerciseId(exercise)
-}
 </script>
 
 <style scoped lang="scss">

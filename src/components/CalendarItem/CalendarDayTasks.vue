@@ -26,14 +26,12 @@ import {ref} from "vue";
 import ModalTask from "@/components/ModalTask/ModalTask";
 
 const props = defineProps({
-  day: Object
+  day: String
 })
 
 const emit = defineEmits(['deleteWorkoutItem'])
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
-const openTaskModal = (value) => {
-  emit('openTaskModal', value)
-}
+const openTaskModal = (value) => emit('openTaskModal', value)
 
 const store = useStore()
 

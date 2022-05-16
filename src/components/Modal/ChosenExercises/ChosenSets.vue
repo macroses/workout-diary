@@ -38,16 +38,21 @@
         <div class="col">
           <div class="set-settings-icon">
             <div
-                @click="editSet(set)"
-                class="set-settings-icon__item">
+              @click="copySetItem(set)"
+              class="set-settings-icon__item">
+              <Icon iconName="copy"/>
+            </div>
+            <div
+              @click="editSet(set)"
+              class="set-settings-icon__item">
               <Icon
                   :iconName="!set.isSettingActive ? 'marker' : 'check'"
                   :style="[set.isSettingActive ? 'fill: green': '']"
               />
             </div>
             <div
-                @click="deleteSetItem(set)"
-                class="set-settings-icon__item">
+              @click="deleteSetItem(set)"
+              class="set-settings-icon__item">
               <Icon iconName="xmark"/>
             </div>
           </div>
@@ -70,6 +75,23 @@ const props = defineProps({
 const store = useStore()
 const deleteSetItem = item => store.deleteSetItem(item)
 const editSet = (item) => item.isSettingActive = !item.isSettingActive
+const copySetItem = (item) => {
+  let {id, repeats, setType, weight} = item
+
+  store.currentExercise.forEach(exercise => {
+    exercise.sets.forEach((set, index) => {
+
+      if(set.id === id) {
+        exercise.sets = [...exercise.sets, {
+          id: Math.floor(Math.random() * Date.now()),
+          repeats,
+          setType,
+          weight
+        }]
+      }
+    })
+  })
+}
 </script>
 
 <style lang="scss" scoped>

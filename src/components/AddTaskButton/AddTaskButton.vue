@@ -11,10 +11,8 @@
         ref="taskOptionsList"
         v-if="isOptionsListOpen"
         class="add_task_options">
-      <li>{{ addWorkoutTitle }}</li>
-      <li>
-        {{ addExerciseTitle }}
-      </li>
+      <li>Добавить упражнение</li>
+      <li>Добавить тренировку</li>
     </ul>
   </div>
 </template>
@@ -29,9 +27,6 @@ const props = defineProps({
 })
 
 const taskOptionsList = ref(null)
-
-const addExerciseTitle = "Добавить упражнение"
-const addWorkoutTitle = "Добавить тренировку"
 
 let isOptionsListOpen = ref(false)
 

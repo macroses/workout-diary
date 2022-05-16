@@ -12,11 +12,13 @@ const routes = [
   {
     path: '/calories',
     name: 'Calories',
+    linkActiveClass: "active",
     component: Calories
   },
   {
     path: '/exercises',
     name: 'Exercises',
+    linkActiveClass: "active",
     component: Exercises
   }
 ]
