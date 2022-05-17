@@ -33,6 +33,10 @@ const emit = defineEmits(['deleteWorkoutItem'])
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
 const openTaskModal = (value) => emit('openTaskModal', value)
 
+// drags events
+// const startDrag = () => emit('startDrag')
+// const endDrag = () => emit('endDrag')
+
 const store = useStore()
 
 const checkEqualDates = (date) => {
@@ -41,6 +45,10 @@ const checkEqualDates = (date) => {
       return el.userValue
     }
   })
+}
+
+const logData = (id) => {
+  console.log(id);
 }
 </script>
 

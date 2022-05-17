@@ -1,72 +1,80 @@
 <template>
-  <ul class="sets">
-    <li
+
+  <VueDraggableNext 
+    tag="ul"
+    class="sets"
+    :list="sets"
+  >
+    <transition-group name="list">
+      <li
         v-for="set in sets"
         :key="set.id"
         class="set-item"
-    >
-      <div class="set-item__row">
-        <div class="col" title="вес">
-          <Icon iconName="weight-scale"/>
-          <div v-if="!set.isSettingActive">{{set.weight}}</div>
-          <input
-            v-else
-            type="text"
-            @focus="$event.target.select()"
-            @keydown="useOnlyNumbers"
-            v-model="set.weight">
-        </div>
-        <div class="col" title="повторы">
-          <Icon iconName="repeat"/>
-          <div v-if="!set.isSettingActive">{{set.repeats}}</div>
-          <input
+      >
+        <div class="set-item__row">
+          <div class="col" title="вес">
+            <Icon iconName="weight-scale"/>
+            <div v-if="!set.isSettingActive">{{set.weight}}</div>
+            <input
               v-else
               type="text"
               @focus="$event.target.select()"
               @keydown="useOnlyNumbers"
-              v-model="set.repeats">
-        </div>
-        <div class="col" title="тип нагрузки">
-          <Icon iconName="chart-line-up"/>
-          <div
-              v-if="set.setType"
-              class="setType-indicator"
-              :style="{backgroundColor: set.setType.color}"
-          ></div>
-          <span v-else>—</span>
-        </div>
-        <div class="col">
-          <div class="set-settings-icon">
+              v-model="set.weight">
+          </div>
+          <div class="col" title="повторы">
+            <Icon iconName="repeat"/>
+            <div v-if="!set.isSettingActive">{{set.repeats}}</div>
+            <input
+                v-else
+                type="text"
+                @focus="$event.target.select()"
+                @keydown="useOnlyNumbers"
+                v-model="set.repeats">
+          </div>
+          <div class="col" title="тип нагрузки">
+            <Icon iconName="chart-line-up"/>
             <div
-              @click="copySetItem(set)"
-              class="set-settings-icon__item">
-              <Icon iconName="copy"/>
-            </div>
-            <div
-              @click="editSet(set)"
-              class="set-settings-icon__item">
-              <Icon
-                :iconName="!set.isSettingActive ? 'marker' : 'check'"
-                :style="[set.isSettingActive ? 'fill: green': '']"
-              />
-            </div>
-            <div
-              @click="deleteSetItem(set)"
-              class="set-settings-icon__item">
-              <Icon iconName="xmark"/>
+                v-if="set.setType"
+                class="setType-indicator"
+                :style="{backgroundColor: set.setType.color}"
+            ></div>
+            <span v-else>—</span>
+          </div>
+          <div class="col">
+            <div class="set-settings-icon">
+              <div
+                @click="copySetItem(set)"
+                class="set-settings-icon__item">
+                <Icon iconName="copy"/>
+              </div>
+              <div
+                @click="editSet(set)"
+                class="set-settings-icon__item">
+                <Icon
+                  :iconName="!set.isSettingActive ? 'marker' : 'check'"
+                  :style="[set.isSettingActive ? 'fill: green': '']"
+                />
+              </div>
+              <div
+                @click="deleteSetItem(set)"
+                class="set-settings-icon__item">
+                <Icon iconName="xmark"/>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </transition-group>
+  </VueDraggableNext>
 </template>
 
 <script setup>
 import { vFocusOnLoad } from "@/directives/myDirectives"
 import { useStore } from '@/store'
 import { useOnlyNumbers } from "@/composables/useOnlyNumbers"
-import Icon from "@/components/UI/Icon";
+import Icon from "@/components/UI/Icon"
+import { VueDraggableNext } from 'vue-draggable-next'
 
 const props = defineProps({
   sets: Array
@@ -87,6 +95,7 @@ const copySetItem = (item) => store.copySetItem(item)
   padding: 0 6px 0 16px;
   display: flex;
   min-height: 30px;
+  cursor: grab;
   &:not(:last-child) {
     border-bottom: 1px solid var(--c-border);
   }
@@ -161,5 +170,23 @@ const copySetItem = (item) => store.copySetItem(item)
       }
     }
   }
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
 }
 </style>
