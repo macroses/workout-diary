@@ -15,21 +15,15 @@
     <transition name="slide" mode="out-in">
       <span :key="day" class="day-num">{{ day.format('D') }}</span>
     </transition>
-    <VueDraggableNext
-      :list="store.getDaysArr"
-      @change="logData"
-    >
-      <CalendarDayTasks
-        @openTaskModal="openTaskModal"
-        @deleteWorkoutItem="deleteWorkoutItem"
-        :day="day"
-      />
-    </VueDraggableNext>
+    <CalendarDayTasks
+      @openTaskModal="openTaskModal"
+      @deleteWorkoutItem="deleteWorkoutItem"
+      :day="day"
+    />
   </li>
 </template>
 
 <script setup>
-import { VueDraggableNext } from "vue-draggable-next";
 import {useDateEquality} from "@/composables/useDate";
 import CalendarDayTasks from "@/components/CalendarItem/CalendarDayTasks";
 import { useStore } from "@/store";
