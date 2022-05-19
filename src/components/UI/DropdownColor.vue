@@ -1,5 +1,7 @@
 <template>
-  <div ref="container" class="dropdown-color__container">
+  <div 
+    ref="container"
+    class="dropdown-color__container">
     <div class="title">цвет задачи</div>
     <div
         @click="toggleDropdown"
@@ -18,6 +20,10 @@
       >
       </li>
     </ul>
+
+    <div class="faq" title="Перетаскивайте тренировки и подходы мышкой в нужном порядке">
+      <Icon iconName="square-question"/>
+    </div>
   </div>
 </template>
 
@@ -25,6 +31,7 @@
 import { ref } from "vue";
 import {useStore} from "@/store";
 import {useOnClickOutside} from "@/composables/useClickOutside";
+import Icon from "./Icon.vue";
 
 const colorCollection = [
   {id: 1, rgb: '213, 0, 0'},
@@ -64,6 +71,18 @@ useOnClickOutside(container, () => isDropDownActive.value = false)
   align-items: center;
   margin: 16px 0;
   padding: 0 16px;
+}
+
+.faq {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--c-text-light);
+  }
 }
 
 .dropdown-color__result {

@@ -6,6 +6,8 @@
     :style="{backgroundColor: 'rgba(' + item.color + ', 0.5)'}"
     :title="item.userValue"
     @click.stop="openTaskModal(item.id)"
+    draggable="true"
+    @dragstart="handleStartDrag(item.id)"
   >
     <div class="task-name">{{ item.userValue }}</div>
     <div
@@ -26,16 +28,15 @@ import {ref} from "vue";
 import ModalTask from "@/components/ModalTask/ModalTask";
 
 const props = defineProps({
-  day: String
+  day: String,
 })
 
-const emit = defineEmits(['deleteWorkoutItem'])
+const emit = defineEmits()
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
 const openTaskModal = (value) => emit('openTaskModal', value)
 
 // drags events
-// const startDrag = () => emit('startDrag')
-// const endDrag = () => emit('endDrag')
+const handleStartDrag = (ev) => emit('handleStartDrag', ev)
 
 const store = useStore()
 
@@ -47,9 +48,6 @@ const checkEqualDates = (date) => {
   })
 }
 
-const logData = (id) => {
-  console.log(id);
-}
 </script>
 
 <style lang="scss" scoped>

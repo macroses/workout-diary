@@ -8,9 +8,13 @@
   <li
     v-for="( day, index ) in store.getDaysArr()"
     :key="index"
-    :class="{ today: useDateEquality(day) }"
     @click="toggleModal(day)"
+    :class="{ today: useDateEquality(day) }"
     :style="[countCells > 35 ? moreHeight : styleHeightCalc]"
+
+    @drop="objectDragEnter(day)"
+    @dragenter.prevent 
+    @dragover.prevent
   >
     <transition name="slide" mode="out-in">
       <span :key="day" class="day-num">{{ day.format('D') }}</span>
@@ -19,6 +23,7 @@
       @openTaskModal="openTaskModal"
       @deleteWorkoutItem="deleteWorkoutItem"
       :day="day"
+      @handleStartDrag="handleStartDrag"
     />
   </li>
 </template>
@@ -27,9 +32,10 @@
 import {useDateEquality} from "@/composables/useDate";
 import CalendarDayTasks from "@/components/CalendarItem/CalendarDayTasks";
 import { useStore } from "@/store";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
-const store = useStore()
+const store = useStore();
+const gragObjectId = ref(null);
 
 const props = defineProps({
   days: Array,
@@ -47,15 +53,21 @@ const moreHeight = {
   height: 'calc((100vh / 6) - 15px'
 }
 
-const emit = defineEmits(['toggleModal', 'openTaskModal'])
+const emit = defineEmits()
 const toggleModal = (value) => emit('toggleModal', value)
 const deleteWorkoutItem = (value) => emit('deleteWorkoutItem', value)
 const openTaskModal = (value) => {
   emit('openTaskModal', value)
 }
 
-const logData = (event) => {
-  console.log(event)
+const handleStartDrag = (event) => gragObjectId.value = event
+
+const objectDragEnter = day => {
+  store.userWorkout.forEach(element => {
+    if(element.id === gragObjectId.value) {
+      element.date = day.format('D.MM.Y')
+    }
+  })
 }
 </script>
 

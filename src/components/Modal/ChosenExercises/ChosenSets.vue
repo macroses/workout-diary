@@ -181,11 +181,9 @@ const copySetItem = (item) => store.copySetItem(item)
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(15px);
 }
 
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
 }
