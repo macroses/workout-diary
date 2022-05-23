@@ -5,7 +5,11 @@
   <main>
     <div class="container">
       <AsideMenu :isMenuOpen="open"/>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="slide" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </main>
 </template>
@@ -22,5 +26,20 @@ const [open, toggleOpen] = useMenu()
 .container {
   display: flex;
   width: 100%;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

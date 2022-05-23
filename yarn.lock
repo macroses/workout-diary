@@ -7462,6 +7462,11 @@
     "@vue/server-renderer" "3.2.31"
     "@vue/shared" "3.2.31"
 
+"vue3-slide-up-down@^1.2.5":
+  "integrity" "sha512-ZdrJjlU5Wk9ZUMa7P61afvh4mEBse/FqEULNQ1HgAXFnMUSDuT4cf682RbesEDkiyXn2Wt0JgQvbkOz9dn8cJQ=="
+  "resolved" "https://registry.npmjs.org/vue3-slide-up-down/-/vue3-slide-up-down-1.2.5.tgz"
+  "version" "1.2.5"
+
 "vuejs-paginate-next@^1.0.2":
   "integrity" "sha512-Dal1HXWuYrbvQ47NkagXIYAcEDnnWM3P8Nykf5a4oHc9PcM5BzlU1Z1NOSXAkjENI3WNoS+WhkpCsBhG9Bptgg=="
   "resolved" "https://registry.npmjs.org/vuejs-paginate-next/-/vuejs-paginate-next-1.0.2.tgz"
