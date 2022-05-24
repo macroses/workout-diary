@@ -24,7 +24,7 @@ label {
 span {
   position: relative;
   padding-left: 32px;
-  color: var(--c-text-invert);
+  color: var(--c-text);
   &:before {
     content: '';
     position: absolute;

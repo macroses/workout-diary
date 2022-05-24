@@ -6,7 +6,7 @@
     <div class="container">
       <AsideMenu :isMenuOpen="open"/>
       <router-view v-slot="{ Component }">
-        <transition name="slide" mode="out-in">
+        <transition name="slide" mode="">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -41,5 +41,6 @@ const [open, toggleOpen] = useMenu()
 .slide-leave-to {
   opacity: 0;
   transform: translateY(30px);
+  overflow: hidden;
 }
 </style>

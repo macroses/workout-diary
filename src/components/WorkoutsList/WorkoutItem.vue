@@ -4,24 +4,40 @@
         v-for="workout in workouts"
         :key="workout.id"
         class="all-workouts__item"
+        @click="toggleModalTask(workout.id)"
     >
       <div class="workout-date">{{ workout.date }}</div>
       <div
           :style="{backgroundColor: `rgb(${workout.color})`}"
           class="workout-color"></div>
       <div class="workout-name">{{ workout.userValue}}</div>
-      <div class="exercise-group"></div>
+      <ul class="exercises-list">
+        <li 
+          class="exercises"
+          v-for="exercise in workout.exercises"
+          :key="exercise.id"
+        >
+          {{exercise.name}},
+        </li>
+      </ul>
     </li>
   </ul>
 </template>
 
 <script setup>
+const emit = defineEmits()
 const props = defineProps({
   workouts: {type: Array, required: true}
 })
+
+const toggleModalTask = (id) => emit('toggleModalTask', id)
 </script>
 
 <style lang="scss" scoped>
+.all-workouts {
+  margin-bottom: 16px;
+}
+
 .all-workouts__item {
   display: flex;
   align-items: center;
@@ -44,6 +60,18 @@ const props = defineProps({
 
 .workout-name {
   padding: 8px 0;
+  font-weight: 500;
+}
+
+.exercises-list {
+  display: flex;
+  margin-left: 8px;
+  gap: 4px;
+}
+
+.exercises {
+  font-size: 12px;
+  font-style: italic;
 }
 
 .fade-move,

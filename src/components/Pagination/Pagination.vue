@@ -25,7 +25,7 @@
 
 <script setup>
 import Paginate from 'vuejs-paginate-next'
-import Dropdown from "@/components/UI/Dropdown";
+import Dropdown from "@/components/UI/Dropdown"
 
 const pageCountArray = [
   {id: 1, val: 5, iconName: ''},
@@ -47,6 +47,7 @@ const getPageCountNumber = (num) => {
 const onPaginateClick = (e) => {
   emit('onPaginateClick', e)
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -54,6 +55,7 @@ const onPaginateClick = (e) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 16px;
 }
 
 .dropdown-box {
