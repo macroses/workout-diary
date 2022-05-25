@@ -39,6 +39,6 @@ export const useSort = (arr, type) => {
       return moment(b.date, 'D.MM.YYYY') - moment(a.date, 'D.MM.YYYY');
     })
   }
-  console.log(type)
+
   return sortedArray
 }

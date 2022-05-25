@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import {computed, ref, watch} from 'vue';
+import { computed, ref } from 'vue';
 import ModalTask from '@/components/ModalTask/ModalTask'
 import { useSort } from '@/composables/useSort';
 import { usePaginate } from '@/composables/usePaginate'
@@ -52,35 +52,16 @@ const sortType = ref(null)
 const taskId = ref(0)
 const isOpenTaskModal = ref(false)
 
-const setSortType = option => {
-  sortType.value = option.id
-  console.log(sortType.value);
-}
-
-const perPage = ref(5)
-const currentPage = ref(1)
-
-const pageCount = computed(() => Math.ceil(store.userWorkout.length / perPage.value))
-
-const visibleItems = computed(() => {
-  const start = (currentPage.value - 1) * perPage.value
-  const end = currentPage.value * perPage.value
-
-  return sortedWorkouts.value.slice(start, end)
-})
-
-const onPaginateClick = pageNum => currentPage.value = Number(pageNum)
+const setSortType = option => sortType.value = option.id
 
 const sortedWorkouts = computed(() => useSort(store.userWorkout, sortType.value))
 
-const setPageCount = (option) => perPage.value = option.val
+const [ pageCount, visibleItems, onPaginateClick, setPageCount ] = usePaginate(sortedWorkouts)
 
 const getTaskId = (id) => {
   taskId.value = id
   isOpenTaskModal.value = true
 }
-
-// const [ pageCount, visibleItems, onPaginateClick, setPageCount ] = usePaginate(sortedWorkouts.value)
 
 </script>
 
@@ -91,5 +72,8 @@ const getTaskId = (id) => {
 
 .workouts-top {
   padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 </style>
